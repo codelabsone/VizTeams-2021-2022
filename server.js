@@ -6,7 +6,7 @@ const app = express();
 app.use(express.static("./dist/employ-project"));
 
 app.get("/*", (req, res) =>
-  res.sendFile("index.html", { root: "dist/employ-project" })
+  res.sendFile("index.html", { root: "dist/employ-project/" })
 );
 
 app.listen(process.env.PORT || 8080);
