@@ -6,19 +6,17 @@ import { MaterialsModule } from './materials/materials.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TeamListConComponent } from './team-list-con/team-list-con.component';
 import { HeaderComponent } from './header/header.component';
+import { TeamInfoComponent } from './team-info/team-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TeamListConComponent,
-    HeaderComponent
+    HeaderComponent,
+    TeamInfoComponent,
   ],
-  imports: [
-    BrowserModule,
-    MaterialsModule,
-    BrowserAnimationsModule
-  ],
+  imports: [BrowserModule, MaterialsModule, BrowserAnimationsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
