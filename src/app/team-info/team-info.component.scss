@@ -1,5 +1,7 @@
 mat-card {
   height: calc(100% - 96px);
   margin: 32px 0;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
