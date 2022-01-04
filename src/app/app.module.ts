@@ -4,10 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MaterialsModule } from './materials/materials.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TeamListConComponent } from './team-list-con/team-list-con.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TeamListConComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider'
+
 
 const MatMods: any[] = [
-  MatCardModule
+  MatCardModule,
+  MatDividerModule
 ]
 
 
@@ -12,6 +15,5 @@ const MatMods: any[] = [
   ,
   exports:
     MatMods
-
 })
 export class MaterialsModule { }
