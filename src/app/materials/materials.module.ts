@@ -6,7 +6,8 @@ import {MatToolbarModule} from '@angular/material/toolbar'
 
 const MatMods: any[] = [
   MatCardModule,
-  MatDividerModule
+  MatDividerModule,
+  MatToolbarModule
 ]
 
 
