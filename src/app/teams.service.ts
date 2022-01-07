@@ -9,7 +9,6 @@ import { Subject } from 'rxjs/internal/Subject';
 export class TeamsService implements OnInit {
   selectedTeam!: Subject<Team>;
 teamsURL = 'https://vizteams-api.herokuapp.com/teams';
-teamURLById = ''
 
 constructor(private http: HttpClient) { }
 

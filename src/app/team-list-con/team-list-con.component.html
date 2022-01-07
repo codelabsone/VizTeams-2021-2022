@@ -25,11 +25,11 @@
     </mat-card>
   <mat-card [style.overflow]="'auto'" style="height: 100%">
     <mat-card-title>Teams</mat-card-title>
-    <!-- <mat-divider></mat-divider> -->
+    <mat-divider></mat-divider>
 
-    <mat-accordion>
+    <!-- <mat-accordion> -->
     <div *ngFor="let team of teams">
-      <mat-expansion-panel (click)="showTeamDetails(team)">
+      <mat-expansion-panel (click)="showTeamDetails(team)" >
         <mat-expansion-panel-header>
           <mat-panel-title>{{ team.name }}</mat-panel-title>
 
@@ -37,7 +37,7 @@
       </mat-expansion-panel>
       <mat-divider></mat-divider>
     </div>
-    </mat-accordion>
+    <!-- </mat-accordion> -->
 
 
   </mat-card>
