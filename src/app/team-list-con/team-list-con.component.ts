@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Team } from '../shared/team.model';
 import { TeamsService } from '../teams.service';
 
 @Component({
@@ -7,13 +8,15 @@ import { TeamsService } from '../teams.service';
   styleUrls: ['./team-list-con.component.scss']
 })
 export class TeamListConComponent implements OnInit {
-teams: any;
+teams: Team[]=[];
 
   constructor(private teamsService: TeamsService) { }
 
   ngOnInit(): void {
     this.teamsService.getAllTeams().subscribe(
-      (teams) => this.teams = teams
+      (teams) => {
+        console.log(teams);
+        this.teams = teams}
     )
   }
 

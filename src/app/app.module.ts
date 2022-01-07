@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TeamListConComponent } from './team-list-con/team-list-con.component';
 import { HeaderComponent } from './header/header.component';
 import { TeamInfoComponent } from './team-info/team-info.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { TeamInfoComponent } from './team-info/team-info.component';
     HeaderComponent,
     TeamInfoComponent,
   ],
-  imports: [BrowserModule, MaterialsModule, BrowserAnimationsModule],
+  imports: [BrowserModule, MaterialsModule, BrowserAnimationsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

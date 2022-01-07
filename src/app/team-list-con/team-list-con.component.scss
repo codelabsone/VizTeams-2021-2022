@@ -3,3 +3,17 @@
   width: 100%;
   height: calc(100% - 32px);
 }
+
+mat-card-title {
+  padding-left: 24px;
+  padding-right: 24px
+}
+
+mat-card {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+mat-expansion-panel-header {
+  border-radius: 0;
+}

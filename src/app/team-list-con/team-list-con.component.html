@@ -1,10 +1,21 @@
 <div class="teamList">
-  <mat-card [style.overflow]="'auto'" style="height: 100%;" >
-      <mat-card-title>Teams</mat-card-title>
+  <mat-card [style.overflow]="'auto'" style="height: 100%">
+    <mat-card-title>Teams</mat-card-title>
+    <!-- <mat-divider></mat-divider> -->
+
+    <mat-accordion>
+    <div *ngFor="let team of teams">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ team.name }}</mat-panel-title>
+
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
       <mat-divider></mat-divider>
-    <mat-card-content>Content</mat-card-content>
-    <mat-card-content>Content</mat-card-content>
-    <mat-card-content>Content</mat-card-content>
-    <mat-card-content>Content</mat-card-content>
+    </div>
+    </mat-accordion>
+
+
   </mat-card>
 </div>
+
