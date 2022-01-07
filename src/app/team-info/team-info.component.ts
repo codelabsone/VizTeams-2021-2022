@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../shared/team.model';
+import { TeamsService } from '../teams.service';
 
 @Component({
   selector: 'app-team-info',
@@ -26,7 +27,14 @@ export class TeamInfoComponent implements OnInit {
     ],
   };
 
-  constructor() {}
+  constructor(private teamService: TeamsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.teamService.selectedTeam.subscribe((selectedTeam) => {
+      this.activeTeam = selectedTeam;
+    });
+  }
+  ngOnDestroy() {
+    this.teamService.selectedTeam.unsubscribe;
+  }
 }

@@ -4,23 +4,22 @@ import { Team } from './shared/team.model';
 import { Subject } from 'rxjs/internal/Subject';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TeamsService implements OnInit {
-  selectedTeam!: Subject<Team>;
-teamsURL = 'https://vizteams-api.herokuapp.com/teams';
+  selectedTeam = new Subject<Team>();
+  teamsURL = 'https://vizteams-api.herokuapp.com/teams';
+  teamURLById = '';
 
-constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  onTeamDetails(team: Team){
-    this.selectedTeam.next(team)
+  onTeamDetails(team: Team) {
+    this.selectedTeam.next(team);
   }
 
-ngOnInit(): void {
+  ngOnInit(): void {}
 
-}
-
-  getAllTeams(){
-   return this.http.get<Team[]>(this.teamsURL)
+  getAllTeams() {
+    return this.http.get<Team[]>(this.teamsURL);
   }
 }
