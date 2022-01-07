@@ -3,3 +3,16 @@
   width: 100%;
   height: calc(100% - 32px);
 }
+
+.actionRow {
+  // background-color: inherit;
+  // position: fixed;
+  // bottom: 0;
+  // width: 46vw;
+  display: flex;
+  justify-content: end;
+}
+
+.material-icons{
+  margin: 15px;
+}
