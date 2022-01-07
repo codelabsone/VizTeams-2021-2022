@@ -8,22 +8,20 @@ import { Team } from '../shared/team.model';
 })
 export class TeamInfoComponent implements OnInit {
   activeTeam: Team = {
-    teamName: 'Fake Team',
+    id: 1,
+    name: 'Owen Wilson Fans',
+    created_at: '2022-01-04T00:36:26.113Z',
+    updated_at: '2022-01-04T00:36:26.113Z',
+    description: 'Wow!!!',
     members: [
       {
-        name: 'Fake Person',
-        title: 'Professional Fake Person',
-        imgUrl: 'https://picsum.photos/200/200',
-      },
-      {
-        name: 'Fake Person',
-        title: 'Professional Fake Person',
-        imgUrl: 'https://picsum.photos/200/200',
-      },
-      {
-        name: 'Fake Person',
-        title: 'Professional Fake Person',
-        imgUrl: 'https://picsum.photos/200/200',
+        id: 1,
+        firstName: 'Zack',
+        lastName: 'Amis',
+        title: 'Software Engineer',
+        pathToPhoto: 'https://picsum.photos/200/200',
+        created_at: '2022-01-04T00:40:48.562Z',
+        updated_at: '2022-01-04T00:40:48.562Z',
       },
     ],
   };
