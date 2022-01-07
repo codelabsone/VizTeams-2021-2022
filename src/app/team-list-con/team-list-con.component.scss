@@ -4,6 +4,7 @@
   height: calc(100% - 32px);
 }
 
+<<<<<<< HEAD
 .actionRow {
   // background-color: inherit;
   // position: fixed;
@@ -15,4 +16,18 @@
 
 .material-icons{
   margin: 15px;
+=======
+mat-card-title {
+  padding-left: 24px;
+  padding-right: 24px
+}
+
+mat-card {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+mat-expansion-panel-header {
+  border-radius: 0;
+>>>>>>> 9033dff2e6f5eef0abe899a61f5d23f3f6c5889c
 }

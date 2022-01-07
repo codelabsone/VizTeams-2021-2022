@@ -1,3 +1,14 @@
 <mat-card>
-  <mat-card-title> Select a team to view members. </mat-card-title>
+  <!-- Don't forget to add back the placeholder text -->
+  <mat-card-title>{{ activeTeam.name }}</mat-card-title>
+
+  <mat-card-content>
+    <div class="member-card" *ngFor="let member of activeTeam.members">
+      <img src="{{ member.pathToPhoto }}" alt="profile pic" />
+      <div class="member-text">
+        <p>{{ member.firstName }} {{ member.lastName }}</p>
+        <p>{{ member.title }}</p>
+      </div>
+    </div>
+  </mat-card-content>
 </mat-card>
