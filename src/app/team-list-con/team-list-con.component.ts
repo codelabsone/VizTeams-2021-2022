@@ -20,4 +20,8 @@ teams: Team[]=[];
     )
   }
 
+  showTeamDetails(team: Team){
+    this.teamsService.onTeamDetails(team)
+  }
+
 }

@@ -5,7 +5,7 @@
 
     <mat-accordion>
     <div *ngFor="let team of teams">
-      <mat-expansion-panel>
+      <mat-expansion-panel (click)="showTeamDetails(team)">
         <mat-expansion-panel-header>
           <mat-panel-title>{{ team.name }}</mat-panel-title>
 
