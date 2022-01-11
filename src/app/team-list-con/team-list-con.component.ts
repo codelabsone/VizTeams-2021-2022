@@ -18,10 +18,15 @@ teams: Team[]=[];
         console.log(teams);
         this.teams = teams}
     )
+    this.teamsService.selectedTeam.subscribe(data => {
+      console.log(data)
+      console.log(data.members)
+    })
   }
 
   showTeamDetails(team: Team){
     this.teamsService.onTeamDetails(team)
   }
+
 
 }

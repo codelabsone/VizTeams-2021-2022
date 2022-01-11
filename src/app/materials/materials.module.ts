@@ -4,6 +4,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion'
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatListModule } from '@angular/material/list'
+
 
 
 const MatMods: any[] = [
@@ -11,7 +13,8 @@ const MatMods: any[] = [
   MatDividerModule,
   MatToolbarModule,
   MatExpansionModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatListModule
 ]
 
 

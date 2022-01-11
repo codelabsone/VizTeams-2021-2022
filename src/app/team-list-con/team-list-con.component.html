@@ -9,7 +9,7 @@
       padding: 0;
     "
   >
-    <div style="margin: 2%; margin-left: 0;">
+    <div style="margin: 2%; margin-left: 0">
       <mat-card-title>Teams</mat-card-title>
       <mat-divider></mat-divider>
     </div>
@@ -21,6 +21,19 @@
             <mat-expansion-panel-header>
               <mat-panel-title>{{ team.name }}</mat-panel-title>
             </mat-expansion-panel-header>
+            <div style="display: flex; justify-content: space-between">
+              <img
+                #templatePhoto
+                style="width: 7%"
+                class="memberPhoto"
+                *ngFor="let member of team.members"
+                src="{{ member.pathToPhoto }}"
+                (error)="templatePhoto.src = 'assets/avatar.png'"
+                alt="member photo"
+                matTooltip="{{member.firstName}}  {{member.lastName}}"
+                matTooltipPosition="above"
+              />
+            </div>
           </mat-expansion-panel>
         </div>
         <!-- </mat-accordion> -->
