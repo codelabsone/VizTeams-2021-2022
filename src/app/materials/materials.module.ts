@@ -6,6 +6,8 @@ import {MatExpansionModule} from '@angular/material/expansion'
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 
 
 const MatMods: any[] = [
@@ -16,6 +18,8 @@ const MatMods: any[] = [
   MatTooltipModule,
   MatDialogModule,
   MatFormFieldModule,
+  MatButtonModule,
+  MatInputModule
 
 ]
 

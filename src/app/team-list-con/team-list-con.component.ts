@@ -29,7 +29,7 @@ teams: Team[]=[];
   onAddTeam() {
     let addTeamRef = this.teamDialog.open(AddTeamComponent, {
       height: 'auto',
-      width: '70vw',
+      width: '60vw',
     });
   }
 
