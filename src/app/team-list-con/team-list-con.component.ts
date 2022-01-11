@@ -1,27 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../database.service';
 import { Team } from '../shared/team.model';
 import { TeamsService } from '../teams.service';
 
 @Component({
   selector: 'app-team-list-con',
   templateUrl: './team-list-con.component.html',
-  styleUrls: ['./team-list-con.component.scss']
+  styleUrls: ['./team-list-con.component.scss'],
 })
 export class TeamListConComponent implements OnInit {
-teams: Team[]=[];
+  teams: Team[] = [];
 
-  constructor(private teamsService: TeamsService) { }
+  constructor(
+    private databaseService: DatabaseService,
+    private teamsService: TeamsService
+    ) {}
 
   ngOnInit(): void {
-    this.teamsService.getAllTeams().subscribe(
-      (teams) => {
-        console.log(teams);
-        this.teams = teams}
-    )
+    this.databaseService.teams.subscribe((teams) => {
+      this.teams = teams;
+    });
   }
 
-  showTeamDetails(team: Team){
-    this.teamsService.onTeamDetails(team)
+  showTeamDetails(i: number){
+    this.teamsService.selectedTeamIndexSubject.next(i)
   }
-
 }
