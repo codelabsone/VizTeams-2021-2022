@@ -60,9 +60,8 @@ export class TeamInfoComponent implements OnInit {
   }
 
   updateActiveTeam() {
-    if (this.teams && this.selectedTeamIndex) {
+    if (this.teams && this.selectedTeamIndex != null || undefined) {
       this.activeTeam = this.teams[this.selectedTeamIndex];
-      console.log(this.teams[this.selectedTeamIndex])
     }
   }
 
