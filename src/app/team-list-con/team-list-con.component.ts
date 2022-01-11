@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Team } from '../shared/team.model';
 import { TeamsService } from '../teams.service';
+import { AddTeamComponent } from './add-team/add-team.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-team-list-con',
@@ -10,7 +12,7 @@ import { TeamsService } from '../teams.service';
 export class TeamListConComponent implements OnInit {
 teams: Team[]=[];
 
-  constructor(private teamsService: TeamsService) { }
+  constructor(private teamsService: TeamsService, public teamDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.teamsService.getAllTeams().subscribe(
@@ -22,6 +24,13 @@ teams: Team[]=[];
 
   showTeamDetails(team: Team){
     this.teamsService.onTeamDetails(team)
+  }
+
+  onAddTeam() {
+    let addTeamRef = this.teamDialog.open(AddTeamComponent, {
+      height: 'auto',
+      width: '70vw',
+    });
   }
 
 }
