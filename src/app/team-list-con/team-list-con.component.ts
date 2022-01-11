@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../database.service';
 import { Team } from '../shared/team.model';
 import { TeamsService } from '../teams.service';
+import { AddTeamComponent } from './add-team/add-team.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-team-list-con',
@@ -11,10 +13,14 @@ import { TeamsService } from '../teams.service';
 export class TeamListConComponent implements OnInit {
   teams: Team[] = [];
 
+<<<<<<< HEAD
   constructor(
     private databaseService: DatabaseService,
     private teamsService: TeamsService
     ) {}
+=======
+  constructor(private teamsService: TeamsService, public teamDialog: MatDialog) { }
+>>>>>>> Dialog-box
 
   ngOnInit(): void {
     this.databaseService.teams.subscribe((teams) => {
@@ -25,4 +31,15 @@ export class TeamListConComponent implements OnInit {
   showTeamDetails(i: number){
     this.teamsService.selectedTeamIndexSubject.next(i)
   }
+<<<<<<< HEAD
+=======
+
+  onAddTeam() {
+    let addTeamRef = this.teamDialog.open(AddTeamComponent, {
+      height: 'auto',
+      width: '60vw',
+    });
+  }
+
+>>>>>>> Dialog-box
 }
