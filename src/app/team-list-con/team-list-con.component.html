@@ -1,45 +1,35 @@
 <div class="teamList">
-  <mat-card [style.overflow]="'auto'" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 0;">
-    <mat-card-title>Teams</mat-card-title>
-    <div style="overflow: auto; height: 100%" >
-
+  <mat-card
+    [style.overflow]="'auto'"
+    style="
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0;
+    "
+  >
+    <div style="margin: 2%; margin-left: 0;">
+      <mat-card-title>Teams</mat-card-title>
       <mat-divider></mat-divider>
+    </div>
+    <div style="overflow: auto; height: 100%">
       <mat-card-content>
-        Content
-      <p>Csdafsdafs</p>
-      <p>Csdafsdafs</p>
-      <p>Csdafsdafs</p>
-
-
+        <!-- <mat-accordion> -->
+        <div *ngFor="let team of teams">
+          <mat-expansion-panel (click)="showTeamDetails(team)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ team.name }}</mat-panel-title>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </div>
+        <!-- </mat-accordion> -->
       </mat-card-content>
     </div>
     <div>
-
       <mat-action-row class="actionRow">
-        <mat-divider></mat-divider>
-        <span class="material-icons" matTooltip="Add Team">
-          add_box
-        </span>
+        <span class="material-icons" matTooltip="Add Team"> add_box </span>
       </mat-action-row>
     </div>
-    </mat-card>
-  <mat-card [style.overflow]="'auto'" style="height: 100%">
-    <mat-card-title>Teams</mat-card-title>
-    <mat-divider></mat-divider>
-
-    <!-- <mat-accordion> -->
-    <div *ngFor="let team of teams">
-      <mat-expansion-panel (click)="showTeamDetails(team)" >
-        <mat-expansion-panel-header>
-          <mat-panel-title>{{ team.name }}</mat-panel-title>
-
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-      <mat-divider></mat-divider>
-    </div>
-    <!-- </mat-accordion> -->
-
-
   </mat-card>
 </div>
-
