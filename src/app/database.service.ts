@@ -21,4 +21,8 @@ export class DatabaseService {
   getMemberById(id: number){
     return this.http.get<Member>(this.membersURL +'/'+ id)
   }
+
+  getAllTeams() {
+    return this.http.get<Team[]>(this.teamsURL);
+  }
 }
