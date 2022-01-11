@@ -8,6 +8,9 @@ import { TeamsService } from '../teams.service';
   styleUrls: ['./team-info.component.scss'],
 })
 export class TeamInfoComponent implements OnInit {
+
+  isTeamSelected: boolean = false;
+
   activeTeam: Team = {
     id: 1,
     name: 'Owen Wilson Fans',
@@ -32,6 +35,7 @@ export class TeamInfoComponent implements OnInit {
   ngOnInit(): void {
     this.teamService.selectedTeam.subscribe((selectedTeam) => {
       this.activeTeam = selectedTeam;
+      this.isTeamSelected = true;
     });
   }
   ngOnDestroy() {

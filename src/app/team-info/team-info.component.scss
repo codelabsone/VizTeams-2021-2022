@@ -4,11 +4,9 @@ mat-card {
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
+  padding-left: 1.5rem;
 }
 
-mat-card-title {
-  margin-left: 1.5rem;
-}
 
 .mat-card-content {
   display: flex;
@@ -39,4 +37,10 @@ img {
     font-weight: 400;
     margin: 0;
   }
+}
+.teambox{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
