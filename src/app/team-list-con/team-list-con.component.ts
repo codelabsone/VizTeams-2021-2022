@@ -1,31 +1,39 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../database.service';
 import { Team } from '../shared/team.model';
 import { TeamsService } from '../teams.service';
+import { AddTeamComponent } from './add-team/add-team.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-team-list-con',
   templateUrl: './team-list-con.component.html',
-  styleUrls: ['./team-list-con.component.scss']
+  styleUrls: ['./team-list-con.component.scss'],
 })
 export class TeamListConComponent implements OnInit {
-teams: Team[]=[];
+  teams: Team[] = [];
 
-  constructor(private teamsService: TeamsService) { }
+  constructor(
+    private databaseService: DatabaseService,
+    private teamsService: TeamsService,
+    public teamDialog: MatDialog
+    ) {}
 
   ngOnInit(): void {
-    this.teamsService.getAllTeams().subscribe(
-      (teams) => {
-        console.log(teams);
-        this.teams = teams}
-    )
-    this.teamsService.selectedTeam.subscribe(data => {
-      console.log(data)
-      console.log(data.members)
-    })
+    this.databaseService.teams.subscribe((teams) => {
+      this.teams = teams;
+    });
   }
 
-  showTeamDetails(team: Team){
-    this.teamsService.onTeamDetails(team)
+  showTeamDetails(i: number){
+    this.teamsService.selectedTeamIndexSubject.next(i)
+  }
+
+  onAddTeam() {
+    let addTeamRef = this.teamDialog.open(AddTeamComponent, {
+      height: 'auto',
+      width: '60vw',
+    });
   }
 
 

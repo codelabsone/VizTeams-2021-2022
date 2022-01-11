@@ -2,24 +2,23 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Team } from './shared/team.model';
 import { Subject } from 'rxjs/internal/Subject';
+import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TeamsService implements OnInit {
-  selectedTeam = new Subject<Team>();
-  teamsURL = 'https://vizteams-api.herokuapp.com/teams';
-  teamURLById = '';
+  selectedTeamIndexSubject = new Subject<number>();
+  selectedTeamMemberId = new Subject<number>();
+  teams: Team[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private db: DatabaseService) {
+    this.db.teams.subscribe((teams)=> {this.teams = teams;});
 
-  onTeamDetails(team: Team) {
-    this.selectedTeam.next(team);
   }
 
-  ngOnInit(): void {}
 
-  getAllTeams() {
-    return this.http.get<Team[]>(this.teamsURL);
+
+  ngOnInit(): void {
   }
 }
