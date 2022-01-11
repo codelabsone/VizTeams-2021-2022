@@ -1,5 +1,9 @@
 <mat-card>
   <!-- Don't forget to add back the placeholder text -->
+
+  <mat-card-title *ngIf="!this.isTeamSelected" class="teambox">Select a team to view members.</mat-card-title>
+
+  <ng-container *ngIf="this.isTeamSelected">
   <mat-card-title>{{ activeTeam.name }}</mat-card-title>
 
   <mat-card-content>
@@ -11,4 +15,4 @@
       </div>
     </div>
   </mat-card-content>
-</mat-card>
+</ng-container>
