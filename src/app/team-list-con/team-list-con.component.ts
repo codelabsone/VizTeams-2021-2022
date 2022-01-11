@@ -13,14 +13,11 @@ import { MatDialog } from '@angular/material/dialog';
 export class TeamListConComponent implements OnInit {
   teams: Team[] = [];
 
-<<<<<<< HEAD
   constructor(
     private databaseService: DatabaseService,
-    private teamsService: TeamsService
+    private teamsService: TeamsService,
+    public teamDialog: MatDialog
     ) {}
-=======
-  constructor(private teamsService: TeamsService, public teamDialog: MatDialog) { }
->>>>>>> Dialog-box
 
   ngOnInit(): void {
     this.databaseService.teams.subscribe((teams) => {
@@ -31,8 +28,6 @@ export class TeamListConComponent implements OnInit {
   showTeamDetails(i: number){
     this.teamsService.selectedTeamIndexSubject.next(i)
   }
-<<<<<<< HEAD
-=======
 
   onAddTeam() {
     let addTeamRef = this.teamDialog.open(AddTeamComponent, {
@@ -41,5 +36,4 @@ export class TeamListConComponent implements OnInit {
     });
   }
 
->>>>>>> Dialog-box
 }

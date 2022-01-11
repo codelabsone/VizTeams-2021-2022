@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../database.service';
+import { Member } from '../shared/member.model';
 import { Team } from '../shared/team.model';
 import { TeamsService } from '../teams.service';
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-team-info',
@@ -8,8 +11,11 @@ import { TeamsService } from '../teams.service';
   styleUrls: ['./team-info.component.scss'],
 })
 export class TeamInfoComponent implements OnInit {
-
   isTeamSelected: boolean = false;
+  isMemberSelected: boolean = false;
+  selectedTeamIndex: number;
+  teams: Team[];
+  activeMember: Member;
 
   activeTeam: Team = {
     id: 1,
@@ -30,15 +36,35 @@ export class TeamInfoComponent implements OnInit {
     ],
   };
 
-  constructor(private teamService: TeamsService) {}
+  constructor(
+    private teamsService: TeamsService,
+    private db: DatabaseService
+  ) {}
 
   ngOnInit(): void {
-    this.teamService.selectedTeam.subscribe((selectedTeam) => {
-      this.activeTeam = selectedTeam;
+    this.db.teams.subscribe((teams) => {
+      console.log(teams);
+      this.teams = teams;
+      this.updateActiveTeam();
+    });
+    this.teamsService.selectedTeamIndexSubject.subscribe((index) => {
       this.isTeamSelected = true;
+      this.selectedTeamIndex = index;
+      this.updateActiveTeam();
+    });
+    this.teamsService.selectedTeamMemberId.subscribe((id) => {
+      this.db.getMemberById(id).pipe(take(1)).subscribe(
+        (member)=> {this.activeMember = member; this.isMemberSelected = true}
+      );
     });
   }
-  ngOnDestroy() {
-    this.teamService.selectedTeam.unsubscribe;
+
+  updateActiveTeam() {
+    if (this.teams && this.selectedTeamIndex) {
+      this.activeTeam = this.teams[this.selectedTeamIndex];
+      console.log(this.teams[this.selectedTeamIndex])
+    }
   }
+
+  ngOnDestroy() {}
 }
