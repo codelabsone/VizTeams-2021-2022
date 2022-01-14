@@ -26,7 +26,13 @@ export class DatabaseService {
     return this.http.get<Team[]>(this.teamsURL);
   }
 
+<<<<<<< HEAD
   addTeam(team){
     return this.http.post<Team>(this.teamsURL, team);
+=======
+  getTeam(id: number) {
+    return this.http.get<Team>(this.teamsURL + "/" + id)
+
+>>>>>>> 1795dcb023e8281b467c502e1291e3461e9bb54a
   }
 }

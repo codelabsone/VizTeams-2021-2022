@@ -13,6 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class TeamListConComponent implements OnInit {
   teams: Team[] = [];
 
+  isTeamsLoaded:boolean = false;
+
   constructor(
     private databaseService: DatabaseService,
     private teamsService: TeamsService,
@@ -22,11 +24,12 @@ export class TeamListConComponent implements OnInit {
   ngOnInit(): void {
     this.databaseService.teams.subscribe((teams) => {
       this.teams = teams;
+      this.isTeamsLoaded = true;
     });
   }
 
-  showTeamDetails(i: number){
-    this.teamsService.selectedTeamIndexSubject.next(i)
+  showTeamDetails(id: number){
+    this.teamsService.changeSelectedTeamId(id)
   }
 
   onAddTeam() {
@@ -34,6 +37,11 @@ export class TeamListConComponent implements OnInit {
       height: 'auto',
       width: '60vw',
     });
+  }
+
+  onMemberSelect(id: number) {
+    this.teamsService.changeSelectedMemberId(id);
+    event.stopPropagation();
   }
 
 

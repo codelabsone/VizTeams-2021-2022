@@ -9,42 +9,53 @@
       padding: 0;
     "
   >
-    <div style="margin: 2%; margin-left: 0">
-      <mat-card-title>Teams</mat-card-title>
-      <mat-divider></mat-divider>
-    </div>
-    <div style="overflow: auto; height: 100%">
-      <mat-card-content>
-        <!-- <mat-accordion> -->
-        <div *ngFor="let team of teams; let i = index">
-          <mat-expansion-panel  (click)="showTeamDetails(i)">
+  <div style="margin: 2%; margin-left: 0">
+    <mat-card-title>Teams</mat-card-title>
 
+      <mat-progress-bar *ngIf="!isTeamsLoaded"  mode="indeterminate"></mat-progress-bar>
+
+    <mat-divider></mat-divider>
+  </div>
+
+  <div style="overflow: auto; height: 100%">
+    <mat-card-content>
+      <!-- <mat-accordion> -->
+        <div *ngFor="let team of teams; let i = index">
+          <mat-expansion-panel (click)="showTeamDetails(team.id)">
             <mat-expansion-panel-header>
               <mat-panel-title>{{ team.name }}</mat-panel-title>
             </mat-expansion-panel-header>
             <div style="display: flex; justify-content: space-between">
-              <img
+              <ng-container *ngFor="let member of team.members">
+                <img
                 #templatePhoto
-                style="width: 7%"
+                style="width: 7%; cursor: pointer;"
                 class="memberPhoto"
-                *ngFor="let member of team.members"
                 src="{{ member.pathToPhoto }}"
                 (error)="templatePhoto.src = 'assets/avatar.png'"
                 alt="member photo"
-                matTooltip="{{member.firstName}}  {{member.lastName}}"
+                matTooltip="{{ member.firstName }}  {{ member.lastName }}"
                 matTooltipPosition="above"
-              />
+                (click)="onMemberSelect(member.id)"
+                cdkDrag
+                />
+              </ng-container>
             </div>
           </mat-expansion-panel>
         </div>
+        <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
         <!-- </mat-accordion> -->
       </mat-card-content>
     </div>
     <div>
       <mat-action-row class="actionRow">
-
-          <span class="material-icons" matTooltip="Add Team" (click)="onAddTeam()"> add_box </span>
-
+        <span
+          class="material-icons"
+          matTooltip="Add Team"
+          (click)="onAddTeam()"
+        >
+          add_box
+        </span>
       </mat-action-row>
     </div>
   </mat-card>
