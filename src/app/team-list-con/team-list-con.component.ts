@@ -13,6 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class TeamListConComponent implements OnInit {
   teams: Team[] = [];
 
+  isTeamsLoaded:boolean = false;
+
   constructor(
     private databaseService: DatabaseService,
     private teamsService: TeamsService,
@@ -22,6 +24,7 @@ export class TeamListConComponent implements OnInit {
   ngOnInit(): void {
     this.databaseService.teams.subscribe((teams) => {
       this.teams = teams;
+      this.isTeamsLoaded = true;
     });
   }
 
