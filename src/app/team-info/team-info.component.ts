@@ -20,11 +20,13 @@ export class TeamInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.teamsService.selectedTeam.subscribe((team) => this.activeTeam = team);
-    this.teamsService.selectedMember.subscribe((member) => this.activeMember = member)
+    this.teamsService.selectedTeam.subscribe((team) => {
+      if (this.activeTeam != team){this.activeTeam = team}});
+    this.teamsService.selectedMember.subscribe((member) => {
+      if(this.activeMember != member){this.activeMember = member}})
   }
 
-onTeamSelected(){this.activeMember = null}
+onTeamSelected(){this.teamsService.changeSelectedMemberId = null}
 
   ngOnDestroy() {}
 }
