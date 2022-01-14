@@ -1,9 +1,15 @@
 <mat-card>
   <!-- Don't forget to add back the placeholder text -->
+  <ng-container *ngIf="activeMember != null || undefined">
+    <mat-card-title>
+      <span (click)="onTeamSelected()" class="teamBreadcrumb" >{{activeMember.team.name}}</span> &gt; {{activeMember.firstName}} {{activeMember.lastName}}
+    </mat-card-title>
+  </ng-container>
 
-  <mat-card-title *ngIf="!this.isTeamSelected" class="teambox">Select a team to view members.</mat-card-title>
+  <ng-container *ngIf="activeMember === null || undefined" >
+  <mat-card-title *ngIf="activeTeam === null || undefined" class="teambox">Select a team to view members.</mat-card-title>
 
-  <ng-container *ngIf="this.isTeamSelected">
+  <ng-container *ngIf="activeTeam != null || undefined">
   <mat-card-title>{{ activeTeam.name }}</mat-card-title>
 
   <mat-card-content>
@@ -15,4 +21,5 @@
       </div>
     </div>
   </mat-card-content>
+</ng-container>
 </ng-container>

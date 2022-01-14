@@ -17,38 +17,40 @@
       <mat-card-content>
         <!-- <mat-accordion> -->
         <div *ngFor="let team of teams; let i = index">
-          <mat-expansion-panel  (click)="showTeamDetails(i)">
-
+          <mat-expansion-panel (click)="showTeamDetails(team.id)">
             <mat-expansion-panel-header>
               <mat-panel-title>{{ team.name }}</mat-panel-title>
             </mat-expansion-panel-header>
             <div style="display: flex; justify-content: space-between">
-
-
+              <ng-container *ngFor="let member of team.members">
                 <img
-                #templatePhoto
-                style="width: 7%"
-                class="memberPhoto"
-                *ngFor="let member of team.members"
-                src="{{ member.pathToPhoto }}"
-                (error)="templatePhoto.src = 'assets/avatar.png'"
-                alt="member photo"
-                matTooltip="{{member.firstName}}  {{member.lastName}}"
-                matTooltipPosition="above"
-                cdkDrag
+                  #templatePhoto
+                  style="width: 7%; cursor: pointer;"
+                  class="memberPhoto"
+                  src="{{ member.pathToPhoto }}"
+                  (error)="templatePhoto.src = 'assets/avatar.png'"
+                  alt="member photo"
+                  matTooltip="{{ member.firstName }}  {{ member.lastName }}"
+                  matTooltipPosition="above"
+                  (click)="onMemberSelect(member.id)"
+                  cdkDrag
                 />
-
-              </div>
-            </mat-expansion-panel>
+              </ng-container>
+            </div>
+          </mat-expansion-panel>
         </div>
         <!-- </mat-accordion> -->
       </mat-card-content>
     </div>
     <div>
       <mat-action-row class="actionRow">
-
-          <span class="material-icons" matTooltip="Add Team" (click)="onAddTeam()"> add_box </span>
-
+        <span
+          class="material-icons"
+          matTooltip="Add Team"
+          (click)="onAddTeam()"
+        >
+          add_box
+        </span>
       </mat-action-row>
     </div>
   </mat-card>

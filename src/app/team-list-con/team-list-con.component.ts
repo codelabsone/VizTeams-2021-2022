@@ -25,8 +25,8 @@ export class TeamListConComponent implements OnInit {
     });
   }
 
-  showTeamDetails(i: number){
-    this.teamsService.selectedTeamIndexSubject.next(i)
+  showTeamDetails(id: number){
+    this.teamsService.changeSelectedTeamId(id)
   }
 
   onAddTeam() {
@@ -34,6 +34,11 @@ export class TeamListConComponent implements OnInit {
       height: 'auto',
       width: '60vw',
     });
+  }
+
+  onMemberSelect(id: number) {
+    this.teamsService.changeSelectedMemberId(id);
+    event.stopPropagation();
   }
 
 
