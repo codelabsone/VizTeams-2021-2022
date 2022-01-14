@@ -11,6 +11,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 const MatMods: any[] = [
@@ -24,7 +25,8 @@ const MatMods: any[] = [
   MatFormFieldModule,
   MatButtonModule,
   MatInputModule,
-  DragDropModule
+  DragDropModule,
+  MatProgressBarModule
 
 ]
 
