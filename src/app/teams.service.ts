@@ -42,13 +42,13 @@ export class TeamsService implements OnInit {
     } else {this.selectedTeam.next(null); this.selectedMember.next(null)}
 }
 
-changeSelectedTeamId(id: number){
+changeSelectedTeamId(id: number | null){
   this.selectedMemberId = null;
   this.selectedTeamId = id;
   this.updateTeamDetails();
 }
 
-changeSelectedMemberId(id: number){
+changeSelectedMemberId(id: number | null){
   this.selectedMemberId = id;
   this.updateTeamDetails();
 }

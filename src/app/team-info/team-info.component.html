@@ -13,13 +13,16 @@
   <mat-card-title>{{ activeTeam.name }}</mat-card-title>
 
   <mat-card-content>
-    <div class="member-card" *ngFor="let member of activeTeam.members">
-      <img src="{{ member.pathToPhoto }}" alt="profile pic" />
-      <div class="member-text">
-        <p>{{ member.firstName }} {{ member.lastName }}</p>
-        <p>{{ member.title }}</p>
+    <ng-container *ngFor="let member of activeTeam.members">
+
+      <div class="member-card" (click)="onMemberSelect(member.id)" >
+        <img src="{{ member.pathToPhoto }}" alt="profile pic" style="cursor: pointer;" />
+        <div class="member-text">
+          <p>{{ member.firstName }} {{ member.lastName }}</p>
+          <p>{{ member.title }}</p>
+        </div>
       </div>
-    </div>
+    </ng-container>
   </mat-card-content>
 </ng-container>
 </ng-container>
