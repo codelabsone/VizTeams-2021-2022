@@ -2,27 +2,56 @@
   <!-- Don't forget to add back the placeholder text -->
   <ng-container *ngIf="activeMember != null || undefined">
     <mat-card-title>
-      <span (click)="onTeamSelected()" class="teamBreadcrumb" >{{activeMember.team.name}}</span> &gt; {{activeMember.firstName}} {{activeMember.lastName}}
+      <span (click)="onTeamSelected()" class="teamBreadcrumb">{{
+        activeMember.team.name
+      }}</span>
+      &gt; {{ activeMember.firstName }} {{ activeMember.lastName }}
+      <mat-divider></mat-divider>
     </mat-card-title>
-  </ng-container>
+    <br>
+    <mat-card-content class="memberContainer">
 
-  <ng-container *ngIf="activeMember === null || undefined" >
-  <mat-card-title *ngIf="activeTeam === null || undefined" class="teambox">Select a team to view members.</mat-card-title>
-
-  <ng-container *ngIf="activeTeam != null || undefined">
-  <mat-card-title>{{ activeTeam.name }}</mat-card-title>
-
-  <mat-card-content>
-    <ng-container *ngFor="let member of activeTeam.members">
-
-      <div class="member-card" (click)="onMemberSelect(member.id)" >
-        <img src="{{ member.pathToPhoto }}" alt="profile pic" style="cursor: pointer;" />
-        <div class="member-text">
-          <p>{{ member.firstName }} {{ member.lastName }}</p>
-          <p>{{ member.title }}</p>
+      <div class="memberContent">
+          <img
+            src="{{ activeMember.pathToPhoto }}"
+            alt="member photo"
+            style="max-width: 100%">
+        <div class="memberInfo">
+          <div class="mat-title" style="margin-bottom: 0">
+            {{ activeMember.firstName }} {{ activeMember.lastName }}
+          </div>
+          <div class="mat-title" style="margin-bottom: 0">
+            {{ activeMember.title }}
+          </div>
+          <div class="mat-title" style="margin-bottom: 0">member email</div>
         </div>
       </div>
+    </mat-card-content>
+  </ng-container>
+
+  <ng-container *ngIf="activeMember === null || undefined">
+    <mat-card-title *ngIf="activeTeam === null || undefined" class="teambox"
+      >Select a team to view members.</mat-card-title
+    >
+
+    <ng-container *ngIf="activeTeam != null || undefined">
+      <mat-card-title>{{ activeTeam.name }}</mat-card-title>
+
+      <mat-card-content>
+        <ng-container *ngFor="let member of activeTeam.members">
+          <div class="member-card" (click)="onMemberSelect(member.id)">
+            <img
+              src="{{ member.pathToPhoto }}"
+              alt="profile pic"
+              style="cursor: pointer"
+            />
+            <div class="member-text">
+              <p>{{ member.firstName }} {{ member.lastName }}</p>
+              <p>{{ member.title }}</p>
+            </div>
+          </div>
+        </ng-container>
+      </mat-card-content>
     </ng-container>
-  </mat-card-content>
-</ng-container>
-</ng-container>
+  </ng-container>
+</mat-card>
