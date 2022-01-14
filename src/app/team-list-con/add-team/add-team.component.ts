@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { DatabaseService } from 'src/app/database.service';
+
 
 @Component({
   selector: 'app-add-team',
@@ -8,7 +12,18 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class AddTeamComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<AddTeamComponent>) { }
+  name = new FormControl('');
+  description = new FormControl('');
+  teamNameControl = new FormControl('', [Validators.required]);
+  @ViewChild('form', { static: false }) addTeamForm: NgForm;
+
+
+
+  constructor(
+    private dialogRef: MatDialogRef<AddTeamComponent>,
+    private http: HttpClient,
+    private databaseService: DatabaseService
+    ) { }
 
 
   ngOnInit(): void {
@@ -18,5 +33,7 @@ export class AddTeamComponent implements OnInit {
     this.dialogRef.close()
   };
 
-
+  onSubmit() {
+    this.databaseService.addTeam(this.addTeamForm.value).subscribe()
+  }
 }

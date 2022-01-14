@@ -25,4 +25,8 @@ export class DatabaseService {
   getAllTeams() {
     return this.http.get<Team[]>(this.teamsURL);
   }
+
+  addTeam(team){
+    return this.http.post<Team>(this.teamsURL, team);
+  }
 }

@@ -2,10 +2,10 @@ import { Member } from './member.model';
 
 export class Team {
   constructor(
-    public id: number,
-    public name: string,
-    public description: string,
-    public members: Member[],
+    public id?: number,
+    public name?: string,
+    public description?: string,
+    public members?: Member[],
     public created_at?: string,
     public updated_at?: string,
 

@@ -1,19 +1,21 @@
 <div class="addTeamFields">
+  <form class="teamAddForm" (ngSubmit)="onSubmit()" #form="ngForm">
 
-  <mat-form-field appearance="standard" class="nameField">
-    <mat-label>Team Name</mat-label>
-    <input matInput>
-  </mat-form-field>
+    <mat-form-field appearance="standard" class="nameField">
+      <mat-label>Team Name</mat-label>
+      <input matInput class="form-control" id="name" ngModel name="name" required>
+      <mat-error *ngIf="teamNameControl.hasError('email')"></mat-error>
+    </mat-form-field>
 
 
-  <mat-form-field appearance="standard" class="infoField">
-    <mat-label >Team Description</mat-label>
-    <textarea matInput></textarea>
-  </mat-form-field>
+    <mat-form-field appearance="standard" class="infoField">
+      <mat-label >Team Description</mat-label>
+      <textarea matInput  class="form-control" id="description" ngModel name="description"></textarea>
+    </mat-form-field>
 
-  <div class="somebtns">
-
-    <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-button>Submit</button>
+  <div class="form-btns">
+    <button mat-button type="reset" (click)="onCancel()">Cancel</button>
+    <button mat-button type="Submit">Submit</button>
   </div>
+</form>
 </div>

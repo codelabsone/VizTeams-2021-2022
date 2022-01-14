@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { TeamInfoComponent } from './team-info/team-info.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddTeamComponent } from './team-list-con/add-team/add-team.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { AddTeamComponent } from './team-list-con/add-team/add-team.component';
     TeamInfoComponent,
     AddTeamComponent,
   ],
-  imports: [BrowserModule, MaterialsModule, BrowserAnimationsModule, HttpClientModule],
+  imports: [BrowserModule, MaterialsModule, BrowserAnimationsModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
