@@ -23,7 +23,9 @@
               <mat-panel-title>{{ team.name }}</mat-panel-title>
             </mat-expansion-panel-header>
             <div style="display: flex; justify-content: space-between">
-              <img
+
+
+                <img
                 #templatePhoto
                 style="width: 7%"
                 class="memberPhoto"
@@ -33,9 +35,11 @@
                 alt="member photo"
                 matTooltip="{{member.firstName}}  {{member.lastName}}"
                 matTooltipPosition="above"
-              />
-            </div>
-          </mat-expansion-panel>
+                cdkDrag
+                />
+
+              </div>
+            </mat-expansion-panel>
         </div>
         <!-- </mat-accordion> -->
       </mat-card-content>
