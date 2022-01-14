@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import {MatCardActions, MatCardModule} from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatExpansionModule} from '@angular/material/expansion'
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatListModule } from '@angular/material/list'
 
@@ -10,6 +10,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 const MatMods: any[] = [
@@ -22,7 +23,8 @@ const MatMods: any[] = [
   MatDialogModule,
   MatFormFieldModule,
   MatButtonModule,
-  MatInputModule
+  MatInputModule,
+  DragDropModule
 
 ]
 
