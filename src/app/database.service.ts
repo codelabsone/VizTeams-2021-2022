@@ -25,4 +25,9 @@ export class DatabaseService {
   getAllTeams() {
     return this.http.get<Team[]>(this.teamsURL);
   }
+
+  getTeam(id: number) {
+    return this.http.get<Team>(this.teamsURL + "/" + id)
+
+  }
 }
