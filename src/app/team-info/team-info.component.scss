@@ -15,6 +15,8 @@ mat-card {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 0px;
+  flex-grow: 1;
 }
 
 img {
@@ -42,6 +44,10 @@ img {
   }
 }
 
+.teamMemberContainer{
+  overflow-y: scroll;
+}
+
 mat-card-title{
   padding-top: 8px + 17.219px;
   padding-bottom: 8px;
@@ -50,7 +56,18 @@ mat-card-title{
 }
 
 mat-divider{
-  margin-top: 17.219px;
+  margin: 0 0 17.219px 0;
+}
+
+mat-card-actions{
+  align-self: flex-end
+}
+
+mat-icon {
+  padding: 15px 15px 15px 30px;
+  float: right;
+  cursor: pointer;
+
 }
 
 .memberContainer{
