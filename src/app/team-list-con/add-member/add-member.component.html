@@ -1,4 +1,40 @@
+<div class="addMemberFields">
+    <form class="memberAddForm" (ngSubmit)="onSubmit()" #form="ngForm">
+<div style="display: flex; width: 100%; gap: 10px" >
+        <mat-form-field appearance="standard" class="firstNameField">
+        <mat-label>First Name</mat-label>
+        <input matInput class="form-control" id="firstName" ngModel name="firstName" required>
+      </mat-form-field>
 
-<div style="display: flex; justify-content: center; align-items: center; text-transform: capitalize; height: 100%">
-    <p>add member dialog</p>
+      <mat-form-field appearance="standard" class="lastNameField">
+        <mat-label>Last Name</mat-label>
+        <input matInput class="form-control" id="lastName" ngModel name="lastName" required>
+      </mat-form-field>
+
+      </div><div style="display: flex; width: 100%; gap: 10px">
+
+      <mat-form-field appearance="standard" class="titleField">
+        <mat-label>Title</mat-label>
+        <mat-select>
+            <mat-option value="one">Software Engineer</mat-option>
+            <mat-option value="two">Quality Engineer</mat-option>
+            <mat-option value="three">Team Lead</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="standard" class="teamField">
+        <mat-label >Team </mat-label>
+        <mat-select>
+          <ng-container >
+          <mat-option *ngFor="let team of teams; let i = index" value=i+1 >{{team.name}}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
 </div>
+    <div class="form-btns">
+      <button mat-button type="reset" (click)="onCancel()">Cancel</button>
+      <button mat-button type="Submit">Submit</button>
+    </div>
+  </form>
+  </div>
