@@ -32,7 +32,7 @@ img {
   .member-text {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     margin-left: 0.5rem;
   }
 
@@ -87,7 +87,7 @@ mat-icon {
   text-transform: capitalize;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   margin-left: 2em;
 }
 
@@ -97,4 +97,13 @@ mat-icon {
 
 .memberContent {
   display: flex;
+
+  img {
+
+  }
+}
+
+.icons {
+  display: flex;
+  justify-content: space-around;
 }
