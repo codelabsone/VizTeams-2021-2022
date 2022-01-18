@@ -24,6 +24,9 @@ mat-expansion-panel {
 .mat-expansion-panel-body{
   background-color: rgb(199, 199, 199) !important;
 }
+.addMember{
+  background-color: rgb(199, 199, 199)
+}
 
 // mat-expansion-panel-description{
 //   background-color: indianred;
@@ -37,6 +40,7 @@ mat-expansion-panel-header {
     // width: 46vw;
     display: flex;
     justify-content: end;
+
   }
 
   .expansion-content{

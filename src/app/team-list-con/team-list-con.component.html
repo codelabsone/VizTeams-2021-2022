@@ -24,11 +24,24 @@
       <mat-card-content>
         <!-- <mat-accordion> -->
         <div *ngFor="let team of teams; let i = index">
-
-          <mat-expansion-panel (click)="showTeamDetails(team.id)" >
-            <mat-expansion-panel-header >
+          <mat-expansion-panel (click)="showTeamDetails(team.id)">
+            <mat-expansion-panel-header>
               <mat-panel-title>{{ team.name }}</mat-panel-title>
             </mat-expansion-panel-header>
+
+   <ng-container *ngIf="team.members.length < 1">
+    <div
+    style="
+      display: flex;
+      justify-content: center;
+      font-weight: bold;
+      padding-top: 1rem;
+    "
+  >
+    <p>No Members on this Team.</p>
+  </div>
+</ng-container>
+
             <div
               style="display: flex; justify-content: space-between"
               cdkDropList
@@ -50,10 +63,32 @@
                 />
               </ng-container>
             </div>
-            <mat-action-row>
+            <mat-action-row class="addMember">
               <p class="counter">{{ team.members.length }} / 12</p>
               <span class="material-icons" (click)="addMemberDialog(team.id)">person_add</span>
             </mat-action-row>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <div class="info-container">
+              <div style="display: flex; justify-content: space-between">
+
+
+                <ng-container *ngFor="let member of team.members">
+                  <img
+                    #templatePhoto
+                    style="width: 7%; cursor: pointer"
+                    class="memberPhoto"
+                    src="{{ member.pathToPhoto }}"
+                    (error)="templatePhoto.src = 'assets/avatar.png'"
+                    alt="member photo"
+                    matTooltip="{{ member.firstName }}  {{ member.lastName }}"
+                    matTooltipPosition="above"
+                    (click)="onMemberSelect(member.id)"
+                    cdkDrag
+                  />
+                </ng-container>
+              </div>
+            </div>
           </mat-expansion-panel>
         </div>
         <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
