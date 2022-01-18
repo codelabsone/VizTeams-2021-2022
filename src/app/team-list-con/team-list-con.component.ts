@@ -57,6 +57,4 @@ export class TeamListConComponent implements OnInit {
     })
 
   }
-
-
 }
