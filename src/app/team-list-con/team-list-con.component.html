@@ -29,21 +29,25 @@
               <mat-panel-title>{{ team.name }}</mat-panel-title>
             </mat-expansion-panel-header>
 
-   <ng-container *ngIf="team.members.length < 1">
-    <div
-    style="
-      display: flex;
-      justify-content: center;
-      font-weight: bold;
-      padding-top: 1rem;
-    "
-  >
-    <p>No Members on this Team.</p>
-  </div>
-</ng-container>
+            <ng-container *ngIf="team.members.length < 1">
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  font-weight: bold;
+                  padding-top: 1rem;
+                "
+              >
+                <p>No Members on this Team.</p>
+              </div>
+            </ng-container>
 
             <div
-              style="display: flex; justify-content: space-between"
+              style="
+                display: flex;
+                justify-content: space-between;
+                margin-top: 1rem;
+              "
               cdkDropList
               cdkDropListOrientation="horizontal"
               (cdkDropListDropped)="onDropMember($event, team)"
@@ -73,8 +77,6 @@
           <mat-expansion-panel>
             <div class="info-container">
               <div style="display: flex; justify-content: space-between">
-
-
                 <ng-container *ngFor="let member of team.members">
                   <img
                     #templatePhoto
