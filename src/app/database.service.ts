@@ -27,11 +27,19 @@ export class DatabaseService {
   }
 
   addTeam(team){
+<<<<<<< Updated upstream
     this.http.post<Team>(this.teamsURL, team).subscribe(
       () => this.getAllTeams().subscribe((teams) => this.teams.next(teams)))
   }
 
   getTeam(id: number) {
     return this.http.get<Team>(this.teamsURL + "/" + id)
+=======
+    return this.http.post<Team>(this.teamsURL, team);
   }
-}
+  getTeam(id: number) {
+    return this.http.get<Team>(this.teamsURL + "/" + id)
+
+    }
+>>>>>>> Stashed changes
+  }
