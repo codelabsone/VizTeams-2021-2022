@@ -34,6 +34,7 @@ export class AddTeamComponent implements OnInit {
   };
 
   onSubmit() {
-    this.databaseService.addTeam(this.addTeamForm.value).subscribe()
+    this.databaseService.addTeam(this.addTeamForm.value);
+    this.dialogRef.close()
   }
 }

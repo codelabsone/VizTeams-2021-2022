@@ -15,7 +15,7 @@ export class DatabaseService {
   membersURL = 'https://vizteams-api.herokuapp.com/members';
 
   constructor(private http: HttpClient) {
-    http.get<Team[]>(this.teamsURL).subscribe((teams) => this.teams.next(teams));
+    this.getAllTeams().subscribe((teams) => this.teams.next(teams));
   }
 
   getMemberById(id: number){
@@ -26,13 +26,14 @@ export class DatabaseService {
     return this.http.get<Team[]>(this.teamsURL);
   }
 
-<<<<<<< HEAD
   addTeam(team){
-    return this.http.post<Team>(this.teamsURL, team);
-=======
+    var data;
+    this.http.post<Team>(this.teamsURL, team).subscribe(data => data = data);
+    this.getAllTeams().subscribe((teams) => this.teams.next(teams));
+    return data
+  }
+
   getTeam(id: number) {
     return this.http.get<Team>(this.teamsURL + "/" + id)
-
->>>>>>> 1795dcb023e8281b467c502e1291e3461e9bb54a
   }
 }
