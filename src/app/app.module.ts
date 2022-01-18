@@ -10,6 +10,7 @@ import { TeamInfoComponent } from './team-info/team-info.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddTeamComponent } from './team-list-con/add-team/add-team.component';
 import { FormsModule } from '@angular/forms';
+import { AddMemberComponent } from './team-list-con/add-member/add-member.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     TeamInfoComponent,
     AddTeamComponent,
+    AddMemberComponent,
   ],
   imports: [BrowserModule, MaterialsModule, BrowserAnimationsModule, HttpClientModule, FormsModule],
   providers: [],

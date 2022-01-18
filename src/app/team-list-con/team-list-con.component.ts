@@ -5,6 +5,7 @@ import { TeamsService } from '../teams.service';
 import { AddTeamComponent } from './add-team/add-team.component';
 import { MatDialog } from '@angular/material/dialog';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { AddMemberComponent } from './add-member/add-member.component';
 
 @Component({
   selector: 'app-team-list-con',
@@ -47,6 +48,14 @@ export class TeamListConComponent implements OnInit {
 
   onDropMember(event: CdkDragDrop<string[]>, currentTeam: Team) {
     moveItemInArray(currentTeam.members, event.previousIndex, event.currentIndex);
+  }
+
+  addMemberDialog() {
+    const addMemberRef = this.teamDialog.open(AddMemberComponent, {
+      width: '30vw',
+      height: '20vh'
+    })
+
   }
 
 
