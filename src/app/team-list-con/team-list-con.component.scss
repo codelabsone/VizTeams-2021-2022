@@ -12,20 +12,36 @@ mat-card {
   padding-right: 0;
 }
 
+
+// .mat-expansion-panel-content {
+//   color: pink;
+// }
+
 mat-expansion-panel {
   border-radius: 0 !important;
+
+}
+.mat-expansion-panel-body{
+  background-color: rgb(199, 199, 199) !important;
 }
 
+// mat-expansion-panel-description{
+//   background-color: indianred;
+// }
 mat-expansion-panel-header {
   border-radius: 0 !important;
   .actionRow {
-    // background-color: inherit;
+     // background-color: grey;
     // position: fixed;
     // bottom: 0;
     // width: 46vw;
     display: flex;
     justify-content: end;
   }
+
+  .expansion-content{
+    background-color: gray;
+   }
 
   .material-icons {
     margin: 15px;
