@@ -37,7 +37,7 @@
               <ng-container *ngFor="let member of team.members">
                 <img
                   #templatePhoto
-                  style="width: 7%; cursor: pointer"
+                  style="width: 7%; cursor: move"
                   class="memberPhoto"
                   src="{{ member.pathToPhoto }}"
                   (error)="templatePhoto.src = 'assets/avatar.png'"
