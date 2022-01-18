@@ -1,0 +1,22 @@
+.addMemberFields{
+    display: flex;
+    // flex-direction: column;
+    height: fit-content;
+    justify-content: space-around;
+    width: calc(60vw - 48px);
+  }
+//   mat-form-field {
+//     flex-basis: 45%;
+//   }
+
+  .firstNameField, .lastNameField, .titleField, .teamField{
+   width: calc(30vw - 24px);
+  }
+  .infoField{
+    width: 100%;
+  }
+
+  .form-btns {
+    display: flex;
+    justify-content: end;
+  }

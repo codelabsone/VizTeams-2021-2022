@@ -13,6 +13,7 @@ import {MatInputModule} from '@angular/material/input';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
 
 
 const MatMods: any[] = [
@@ -28,7 +29,8 @@ const MatMods: any[] = [
   MatInputModule,
   DragDropModule,
   MatProgressBarModule,
-  MatIconModule
+  MatIconModule,
+  MatSelectModule
 
 ]
 

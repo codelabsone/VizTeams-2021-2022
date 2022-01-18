@@ -52,7 +52,7 @@
             </div>
             <mat-action-row>
               <p class="counter">{{ team.members.length }} / 12</p>
-              <span class="material-icons" (click)="addMemberDialog()">person_add</span>
+              <span class="material-icons" (click)="addMemberDialog(team.id)">person_add</span>
             </mat-action-row>
           </mat-expansion-panel>
         </div>
