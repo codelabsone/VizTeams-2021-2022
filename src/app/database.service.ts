@@ -27,10 +27,8 @@ export class DatabaseService {
   }
 
   addTeam(team){
-    var data;
-    this.http.post<Team>(this.teamsURL, team).subscribe(data => data = data);
-    this.getAllTeams().subscribe((teams) => this.teams.next(teams));
-    return data
+    this.http.post<Team>(this.teamsURL, team).subscribe(
+      () => this.getAllTeams().subscribe((teams) => this.teams.next(teams)))
   }
 
   getTeam(id: number) {
