@@ -8,14 +8,14 @@
       &gt; {{ activeMember.firstName }} {{ activeMember.lastName }}
       <mat-divider></mat-divider>
     </mat-card-title>
-    <br>
+    <br />
     <mat-card-content class="memberContainer">
-
       <div class="memberContent">
-          <img
-            src="{{ activeMember.pathToPhoto }}"
-            alt="member photo"
-            style="max-width: 100%">
+        <img
+          src="{{ activeMember.pathToPhoto }}"
+          alt="member photo"
+          style="max-width: 100%"
+        />
         <div class="memberInfo">
           <div class="mat-title" style="margin-bottom: 0">
             {{ activeMember.firstName }} {{ activeMember.lastName }}
@@ -29,6 +29,7 @@
     </mat-card-content>
   </ng-container>
 
+
   <ng-container *ngIf="activeMember === null || undefined">
     <mat-card-title *ngIf="activeTeam === null || undefined" class="teambox"
       >Select a team to view members.</mat-card-title
@@ -37,7 +38,7 @@
     <ng-container *ngIf="activeTeam != null || undefined">
       <mat-card-title>{{ activeTeam.name }}</mat-card-title>
 
-      <mat-card-content>
+      <mat-card-content class="teamMemberContainer">
         <ng-container *ngFor="let member of activeTeam.members">
           <div class="member-card" (click)="onMemberSelect(member.id)">
             <img
@@ -52,6 +53,12 @@
           </div>
         </ng-container>
       </mat-card-content>
+
+      <mat-card-actions>
+        <mat-divider></mat-divider>
+        <mat-icon matTooltip="Archive {{activeTeam.name}}" [matTooltipPosition]="'above'">archive</mat-icon><mat-icon matTooltip="Edit {{activeTeam.name}}">edit</mat-icon>
+      </mat-card-actions>
+
     </ng-container>
   </ng-container>
 </mat-card>
