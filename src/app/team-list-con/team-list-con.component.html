@@ -23,12 +23,26 @@
     <div style="overflow: auto; height: 100%">
       <mat-card-content>
         <!-- <mat-accordion> -->
-        <div *ngFor="let team of teams; let i = index">
+        <div *ngFor="let team of teams; let i = index" >
           <mat-expansion-panel (click)="showTeamDetails(team.id)">
             <mat-expansion-panel-header>
               <mat-panel-title>{{ team.name }}</mat-panel-title>
             </mat-expansion-panel-header>
 
+
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                margin-top: 1rem;
+              "
+              [id] = "team.id.toString()"
+              [cdkDropListData]="team.members"
+              [cdkDropListConnectedTo]="connectedTo"
+              cdkDropList
+              cdkDropListOrientation="horizontal"
+              (cdkDropListDropped)="onDropMember($event)"
+            >
             <ng-container *ngIf="team.members.length < 1">
               <div
                 style="
@@ -40,18 +54,7 @@
               >
                 <p>No Members on this Team.</p>
               </div>
-            </ng-container>
-
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                margin-top: 1rem;
-              "
-              cdkDropList
-              cdkDropListOrientation="horizontal"
-              (cdkDropListDropped)="onDropMember($event, team)"
-            >
+           </ng-container>
               <ng-container *ngFor="let member of team.members">
                 <img
                   #templatePhoto
