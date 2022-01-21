@@ -68,8 +68,8 @@
 
       <mat-card-actions>
         <mat-divider></mat-divider>
-        <mat-icon matTooltip="Archive {{activeTeam.name}}" matTooltipPosition="above">archive</mat-icon>
-        <mat-icon matTooltip="Edit {{activeTeam.name}}">edit</mat-icon>
+        <mat-icon matTooltip="Archive {{activeTeam.name}}" matTooltipPosition="above" (click)='onArchiveTeam()'>archive</mat-icon>
+        <mat-icon matTooltip="Edit {{activeTeam.name}}" (click)="onEditTeam()">edit</mat-icon>
         <mat-icon matTooltip="{{activeTeam.name}}'s History">history</mat-icon>
       </mat-card-actions>
 

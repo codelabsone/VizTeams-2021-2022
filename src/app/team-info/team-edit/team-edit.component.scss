@@ -1,0 +1,15 @@
+.editTeamFields{
+    display: flex;
+    flex-direction: column;
+  }
+  .nameField{
+    width: 100%;
+  }
+  .infoField{
+    width: 100%;
+  }
+
+  .form-btns {
+    display: flex;
+    justify-content: end;
+  }

@@ -33,9 +33,22 @@ export class DatabaseService {
       );
   }
 
+  editTeam(id: number, team: any) {
+    return this.http.patch<Team>(this.teamsURL + '/' + id, team)
+  }
+
   getTeam(id: number) {
     return this.http.get<Team>(this.teamsURL + '/' + id);
   }
 
   addMember(newMember) {}
+
+  deleteTeam(id:number) {
+    console.log(this.teamsURL + '/' + id);
+    this.http.delete(this.teamsURL + '/' + id).subscribe(() => {
+      this.http.get<Team[]>(this.teamsURL).subscribe((teams) => {
+        this.teams.next(teams);
+      })
+    });
+  }
 }
