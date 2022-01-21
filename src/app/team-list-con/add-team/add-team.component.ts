@@ -12,10 +12,8 @@ import { DatabaseService } from 'src/app/database.service';
 })
 export class AddTeamComponent implements OnInit {
 
-  name = new FormControl('');
+  name = new FormControl('', [Validators.required]);
   description = new FormControl('');
-  teamNameControl = new FormControl('', [Validators.required]);
-  @ViewChild('form', { static: false }) addTeamForm: NgForm;
 
 
 
@@ -33,8 +31,10 @@ export class AddTeamComponent implements OnInit {
     this.dialogRef.close()
   };
 
-  onSubmit() {
-    this.databaseService.addTeam(this.addTeamForm.value);
-    this.dialogRef.close()
+  onSubmit(newTeam: NgForm) {
+    if (newTeam.valid && newTeam.value.name.trim().length != 0) {
+      this.databaseService.addTeam(newTeam.value);
+      this.dialogRef.close()
+    }
   }
 }

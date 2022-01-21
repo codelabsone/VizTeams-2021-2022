@@ -1,10 +1,10 @@
 <div class="addTeamFields">
-  <form class="teamAddForm" (ngSubmit)="onSubmit()" #form="ngForm">
+  <form class="teamAddForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
 
     <mat-form-field appearance="standard" class="nameField">
       <mat-label>Team Name</mat-label>
-      <input matInput class="form-control" id="name" ngModel name="name" required>
-      <mat-error *ngIf="teamNameControl.hasError('email')"></mat-error>
+      <input matInput class="form-control" id="name" ngModel name="name" noWhitespace>
+      <mat-error>Team name required</mat-error>
     </mat-form-field>
 
 

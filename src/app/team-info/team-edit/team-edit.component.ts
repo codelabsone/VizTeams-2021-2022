@@ -12,7 +12,6 @@ import { DatabaseService } from 'src/app/database.service';
 export class TeamEditComponent implements OnInit {
   editTeam: any
   name = new FormControl('', [Validators.required]);
-  @ViewChild('form', { static: false }) editTeamForm: NgForm;
 
   constructor(
     private teamService: TeamsService,
@@ -27,7 +26,7 @@ export class TeamEditComponent implements OnInit {
   onSubmit(editForm: NgForm) {
     let teamId = this.teamService.selectedTeamId
     let teamName = editForm.value.name
-    if (this.editTeamForm.valid && teamName.trim().length != 0) {
+    if (editForm.valid && teamName.trim().length != 0) {
       this.db.editTeam(teamId, editForm.value).subscribe();
       this.dialogRef.close();
     }
