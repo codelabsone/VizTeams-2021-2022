@@ -38,4 +38,13 @@ export class DatabaseService {
   }
 
   addMember(newMember) {}
+
+  deleteTeam(id:number) {
+    console.log(this.teamsURL + '/' + id);
+    this.http.delete(this.teamsURL + '/' + id).subscribe(() => {
+      this.http.get<Team[]>(this.teamsURL).subscribe((teams) => {
+        this.teams.next(teams);
+      })
+    });
+  }
 }

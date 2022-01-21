@@ -4,6 +4,8 @@ import { Member } from '../shared/member.model';
 import { Team } from '../shared/team.model';
 import { TeamsService } from '../teams.service';
 import { take } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { ArchiveDialogComponent } from './archive-dialog/archive-dialog.component';
 
 @Component({
   selector: 'app-team-info',
@@ -16,7 +18,8 @@ export class TeamInfoComponent implements OnInit {
 
   constructor(
     private teamsService: TeamsService,
-    private db: DatabaseService
+    private db: DatabaseService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +41,14 @@ export class TeamInfoComponent implements OnInit {
 
   onMemberSelect(id: number) {
     this.teamsService.changeSelectedMemberId(id);
+  }
+
+  onArchiveTeam() {
+    this.dialog.open(ArchiveDialogComponent, {
+      height: 'fitcontent',
+      width: 'fitcontent',
+      data: {team: this.activeTeam}
+    })
   }
 
   ngOnDestroy() {}
