@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { AddMemberComponent } from './team-list-con/add-member/add-member.component';
 import { TeamEditComponent } from './team-info/team-edit/team-edit.component';
 import { ArchiveDialogComponent } from './team-info/archive-dialog/archive-dialog.component';
+import { NoWhitespaceDirective } from './team-name.validator';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ArchiveDialogComponent } from './team-info/archive-dialog/archive-dialo
     AddMemberComponent,
     TeamEditComponent,
     ArchiveDialogComponent,
+    NoWhitespaceDirective,
   ],
   imports: [BrowserModule, MaterialsModule, BrowserAnimationsModule, HttpClientModule, FormsModule],
   providers: [],

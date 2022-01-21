@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TeamsService } from 'src/app/teams.service';
 import { MatDialogRef } from '@angular/material/dialog';
-import { NgForm } from '@angular/forms';
+import { FormControl, NgForm, Validators } from '@angular/forms';
 import { DatabaseService } from 'src/app/database.service';
 
 @Component({
@@ -10,11 +10,8 @@ import { DatabaseService } from 'src/app/database.service';
   styleUrls: ['./team-edit.component.scss']
 })
 export class TeamEditComponent implements OnInit {
-
   editTeam: any
-  // name = new FormControl('');
-  // description = new FormControl('');
-  // teamNameControl = new FormControl('', [Validators.required]);
+  name = new FormControl('', [Validators.required]);
   @ViewChild('form', { static: false }) editTeamForm: NgForm;
 
   constructor(
@@ -29,9 +26,11 @@ export class TeamEditComponent implements OnInit {
 
   onSubmit(editForm: NgForm) {
     let teamId = this.teamService.selectedTeamId
-    this.db.editTeam(teamId, editForm.value).subscribe()
-    // call update method from database service;
-    this.dialogRef.close();
+    let teamName = editForm.value.name
+    if (this.editTeamForm.valid && teamName.trim().length != 0) {
+      this.db.editTeam(teamId, editForm.value).subscribe();
+      this.dialogRef.close();
+    }
   }
 
   onCancel() {

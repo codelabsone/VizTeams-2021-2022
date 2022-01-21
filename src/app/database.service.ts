@@ -34,7 +34,7 @@ export class DatabaseService {
   }
 
   editTeam(id: number, team: any) {
-    return this.http.put<Team>(this.teamsURL + '/' + id, team)
+    return this.http.patch<Team>(this.teamsURL + '/' + id, team)
   }
 
   getTeam(id: number) {
