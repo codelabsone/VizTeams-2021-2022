@@ -13,7 +13,7 @@ export class TeamsService implements OnInit {
   private selectedMemberId: number;
   selectedMember = new BehaviorSubject<Member | null>(null);
   selectedTeam = new BehaviorSubject<Team | null>(null);
-  private selectedTeamId: number;
+  selectedTeamId: number;
   private selectedTeamIndexSubject = new Subject<number>();
   private selectedTeamMemberId = new Subject<number>();
   private teams: Team[];

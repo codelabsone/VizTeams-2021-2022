@@ -29,6 +29,11 @@ export class DatabaseService {
   addTeam(team){
     return this.http.post<Team>(this.teamsURL, team);
   }
+
+  editTeam(id: number, team: any) {
+    return this.http.put<Team>(this.teamsURL + '/' + id, team)
+  }
+
   getTeam(id: number) {
     return this.http.get<Team>(this.teamsURL + "/" + id)
 

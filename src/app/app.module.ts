@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddTeamComponent } from './team-list-con/add-team/add-team.component';
 import { FormsModule } from '@angular/forms';
 import { AddMemberComponent } from './team-list-con/add-member/add-member.component';
+import { TeamEditComponent } from './team-info/team-edit/team-edit.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AddMemberComponent } from './team-list-con/add-member/add-member.compon
     TeamInfoComponent,
     AddTeamComponent,
     AddMemberComponent,
+    TeamEditComponent,
   ],
   imports: [BrowserModule, MaterialsModule, BrowserAnimationsModule, HttpClientModule, FormsModule],
   providers: [],

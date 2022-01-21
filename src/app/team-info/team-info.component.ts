@@ -4,6 +4,8 @@ import { Member } from '../shared/member.model';
 import { Team } from '../shared/team.model';
 import { TeamsService } from '../teams.service';
 import { take } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { TeamEditComponent } from './team-edit/team-edit.component';
 
 @Component({
   selector: 'app-team-info',
@@ -16,7 +18,8 @@ export class TeamInfoComponent implements OnInit {
 
   constructor(
     private teamsService: TeamsService,
-    private db: DatabaseService
+    private db: DatabaseService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -41,4 +44,10 @@ export class TeamInfoComponent implements OnInit {
   }
 
   ngOnDestroy() {}
+
+  onEditTeam() {
+    const dialogRef = this.dialog.open(TeamEditComponent, {
+      width: '700px'
+    })
+  }
 }

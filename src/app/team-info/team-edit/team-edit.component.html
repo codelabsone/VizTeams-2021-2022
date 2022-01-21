@@ -1,0 +1,20 @@
+<div class="editTeamFields">
+  <form class="editTeamForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
+
+    <mat-form-field appearance="standard" class="nameField">
+      <mat-label>Team Name</mat-label>
+      <input matInput class="form-control" id="name" ngModel name="name" required [(ngModel)]="editTeam.value.name">
+    </mat-form-field>
+
+
+    <mat-form-field appearance="standard" class="infoField">
+      <mat-label >Team Description</mat-label>
+      <textarea matInput  class="form-control" id="description" ngModel name="description" [(ngModel)]="editTeam.value.description"></textarea>
+    </mat-form-field>
+
+  <div class="form-btns">
+    <button mat-button type="reset" (click)="onCancel()">Cancel</button>
+    <button mat-button type="Submit">Submit</button>
+  </div>
+</form>
+</div>
