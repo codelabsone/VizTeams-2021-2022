@@ -33,6 +33,11 @@ export class AddMemberComponent implements OnInit {
 
   ngOnInit(): void {
     this.databaseService.teams.subscribe(teams => {this.teams = teams; })
+
+    this.http.get('https://picsum.photos/v2/list?limit=100').subscribe((response) => {
+      console.log(response);
+    })
+
   }
 
 
