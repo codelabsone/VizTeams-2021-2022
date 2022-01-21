@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentRef, OnInit } from '@angular/core';
 import { DatabaseService } from '../database.service';
 import { Team } from '../shared/team.model';
 import { TeamsService } from '../teams.service';
@@ -54,7 +54,7 @@ export class TeamListConComponent implements OnInit {
     const addMemberRef = this.teamDialog.open(AddMemberComponent, {
        height: 'auto',
        width: '60vw'
-    })
-
+    });
+    addMemberRef.componentInstance.selectedTeamId = id
   }
 }
