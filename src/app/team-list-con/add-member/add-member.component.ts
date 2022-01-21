@@ -15,7 +15,7 @@ import { Team } from 'src/app/shared/team.model';
 export class AddMemberComponent implements OnInit {
 
   teams: Team[];
-
+  selectedTeam: Team;
   @Input() selectedTeamId;
   name = new FormControl('');
   description = new FormControl('');
@@ -32,7 +32,7 @@ export class AddMemberComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.databaseService.teams.subscribe(teams => this.teams)
+    this.databaseService.teams.subscribe(teams => {this.teams = teams; })
 
     this.http.get('https://picsum.photos/v2/list?limit=100').subscribe((response) => {
       console.log(response);
@@ -40,8 +40,10 @@ export class AddMemberComponent implements OnInit {
 
   }
 
+
   onCancel() {
-    this.dialogRef.close()
+    this.dialogRef.close();
+    console.log(this.selectedTeamId)
   };
 
   onSubmit() {

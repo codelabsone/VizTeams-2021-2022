@@ -3,12 +3,12 @@
 <div style="display: flex; width: 100%; gap: 10px" >
         <mat-form-field appearance="standard" class="firstNameField">
         <mat-label>First Name</mat-label>
-        <input matInput class="form-control" id="firstName" ngModel name="firstName" required>
+        <input matInput class="form-control" id="firstName" ngModel name="firstName">
       </mat-form-field>
 
       <mat-form-field appearance="standard" class="lastNameField">
         <mat-label>Last Name</mat-label>
-        <input matInput class="form-control" id="lastName" ngModel name="lastName" required>
+        <input matInput class="form-control" id="lastName" ngModel name="lastName">
       </mat-form-field>
 
       </div><div style="display: flex; width: 100%; gap: 10px">
@@ -24,11 +24,9 @@
 
 
       <mat-form-field appearance="standard" class="teamField">
-        <mat-label >Team </mat-label>
-        <mat-select>
-          <ng-container >
-          <mat-option *ngFor="let team of teams; let i = index" value=i+1 >{{team.name}}</mat-option>
-          </ng-container>
+        <mat-label  >Team </mat-label>
+        <mat-select [(value)]="selectedTeamId" >
+          <mat-option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</mat-option>
         </mat-select>
       </mat-form-field>
 </div>
