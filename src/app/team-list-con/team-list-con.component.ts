@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentRef, OnInit } from '@angular/core';
 import { DatabaseService } from '../database.service';
 import { Team } from '../shared/team.model';
 import { TeamsService } from '../teams.service';
@@ -20,7 +20,7 @@ export class TeamListConComponent implements OnInit {
   constructor(
     private databaseService: DatabaseService,
     private teamsService: TeamsService,
-    public teamDialog: MatDialog
+    public teamDialog: MatDialog,
     ) {}
 
   ngOnInit(): void {
@@ -50,11 +50,11 @@ export class TeamListConComponent implements OnInit {
     moveItemInArray(currentTeam.members, event.previousIndex, event.currentIndex);
   }
 
-  addMemberDialog() {
+  addMemberDialog(id) {
     const addMemberRef = this.teamDialog.open(AddMemberComponent, {
-      width: '30vw',
-      height: '20vh'
-    })
-
+       height: 'auto',
+       width: '60vw'
+    });
+    addMemberRef.componentInstance.selectedTeamId = id
   }
 }
