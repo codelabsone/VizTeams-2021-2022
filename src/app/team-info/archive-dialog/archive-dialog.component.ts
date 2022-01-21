@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
+import { TeamsService } from 'src/app/teams.service';
 import { Team } from '../../shared/team.model';
 
 @Component({
@@ -12,7 +13,7 @@ import { Team } from '../../shared/team.model';
 export class ArchiveDialogComponent implements OnInit {
 
   activeTeam: Team;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {team: Team}, private http: HttpClient, private dbservice: DatabaseService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {team: Team}, private http: HttpClient, private dbservice: DatabaseService, private teamservice: TeamsService) {
   }
 
   ngOnInit(): void {
@@ -22,5 +23,6 @@ export class ArchiveDialogComponent implements OnInit {
 
   onConfirmDelete() {
     this.dbservice.deleteTeam(this.activeTeam.id);
+    this.teamservice.selectedTeam.next(null);
   }
 }

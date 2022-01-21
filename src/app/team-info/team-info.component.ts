@@ -44,11 +44,12 @@ export class TeamInfoComponent implements OnInit {
   }
 
   onArchiveTeam() {
-    this.dialog.open(ArchiveDialogComponent, {
+    let dialogRef = this.dialog.open(ArchiveDialogComponent, {
       height: 'fitcontent',
       width: 'fitcontent',
       data: {team: this.activeTeam}
     })
+    dialogRef.afterClosed().subscribe
   }
 
   ngOnDestroy() {}
