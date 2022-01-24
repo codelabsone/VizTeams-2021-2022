@@ -1,6 +1,16 @@
+<div *ngFor="let image of images">
+<img class="profile-pics" [src]="image.download_url">
+</div>
+
+ <mat-paginator #paginator [length]="100" [pageSize]='5' aria-label="Select page">
+</mat-paginator>
+
+
 <div class="addMemberFields">
     <form class="memberAddForm" (ngSubmit)="onSubmit()" #form="ngForm">
 <div style="display: flex; width: 100%; gap: 10px" >
+
+
         <mat-form-field appearance="standard" class="firstNameField">
         <mat-label>First Name</mat-label>
         <input matInput class="form-control" id="firstName" ngModel name="firstName">

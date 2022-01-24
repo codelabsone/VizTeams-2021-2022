@@ -21,6 +21,9 @@ export class AddMemberComponent implements OnInit {
   description = new FormControl('');
   teamNameControl = new FormControl('', [Validators.required]);
   @ViewChild('form', { static: false }) addMemberForm: NgForm;
+  images: {url?: string, download_url?: string}[];
+
+
 
 
 
@@ -34,10 +37,10 @@ export class AddMemberComponent implements OnInit {
   ngOnInit(): void {
     this.databaseService.teams.subscribe(teams => {this.teams = teams; })
 
-    this.http.get('https://picsum.photos/v2/list?limit=100').subscribe((response) => {
-      console.log(response);
+    this.http.get('https://picsum.photos/v2/list?page=1&limit=5').subscribe((response: []) => {
+      this.images = response;
+      console.log(this.images)
     })
-
   }
 
 
