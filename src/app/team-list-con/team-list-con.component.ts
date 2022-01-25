@@ -22,6 +22,7 @@ export class TeamListConComponent implements OnInit {
   draggedOver: boolean = false;
   isTeamsLoaded: boolean = false;
   connectedTo = [];
+  dragging: boolean= false;
 
   constructor(
     private databaseService: DatabaseService,
@@ -91,4 +92,5 @@ toConsoleLog(event){
     });
     addMemberRef.componentInstance.selectedTeamId = id;
   }
+
 }

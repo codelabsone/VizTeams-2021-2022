@@ -20,11 +20,11 @@
       <mat-divider></mat-divider>
     </div>
 
-    <div style="overflow: auto; height: 100%">
+    <div style="overflow: auto; height: 100%"  >
       <mat-card-content>
         <!-- <mat-accordion> -->
-        <div *ngFor="let team of teams; let i = index" >
-          <mat-expansion-panel (click)="showTeamDetails(team.id)" >
+        <div *ngFor="let team of teams; let i = index" cdkDropList>
+          <mat-expansion-panel (click)="showTeamDetails(team.id)" #panel (mouseenter)="dragging ? panel.open(): null" (mouseleave)="dragging ? panel.close(): null">
             <mat-expansion-panel-header>
               <mat-panel-title>{{ team.name }}</mat-panel-title>
             </mat-expansion-panel-header>
@@ -72,6 +72,8 @@
                   matTooltipPosition="above"
                   (click)="onMemberSelect(member.id)"
                   cdkDrag
+                  (cdkDragStarted)="dragging = true"
+                  (cdkDragEnded)="dragging = false"
                 />
               </ng-container>
             </div>
