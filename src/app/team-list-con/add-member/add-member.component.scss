@@ -10,7 +10,7 @@
 //   }
 
   .firstNameField, .lastNameField, .titleField, .teamField{
-   width: calc(30vw - 24px);
+    width: calc(30vw - 24px);
   }
   .infoField{
     width: 100%;
@@ -21,9 +21,23 @@
     justify-content: end;
   }
 .profile-pics{
-  max-width: 100px;
-  max-height: 100px;
+  width: 7vw;
+  max-width: 80px;
+  height: 7vw;
+  max-height: 80px;
   object-fit: cover;
+  opacity: 0.5;
+}
 
+.selected-pic {
+  opacity: 1;
+  border-bottom: 3px;
+  border-color: #ff4e00;
+}
 
+.prof-pics-cont {
+  display: flex;
+  width: 80%;
+  margin: 20px 10%;
+  justify-content: space-between;
 }

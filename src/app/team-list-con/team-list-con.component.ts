@@ -87,7 +87,7 @@ toConsoleLog(event){
   addMemberDialog(id) {
     const addMemberRef = this.teamDialog.open(AddMemberComponent, {
       height: 'auto',
-      width: '60vw',
+      width: '50vw',
     });
     addMemberRef.componentInstance.selectedTeamId = id;
   }
