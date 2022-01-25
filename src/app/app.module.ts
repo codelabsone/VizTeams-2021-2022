@@ -14,6 +14,7 @@ import { AddMemberComponent } from './team-list-con/add-member/add-member.compon
 import { TeamEditComponent } from './team-info/team-edit/team-edit.component';
 import { ArchiveDialogComponent } from './team-info/archive-dialog/archive-dialog.component';
 import { NoWhitespaceDirective } from './team-name.directive';
+import { SignUpComponent } from './header/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NoWhitespaceDirective } from './team-name.directive';
     TeamEditComponent,
     ArchiveDialogComponent,
     NoWhitespaceDirective,
+    SignUpComponent,
   ],
   imports: [BrowserModule, MaterialsModule, BrowserAnimationsModule, HttpClientModule, FormsModule],
   providers: [],
