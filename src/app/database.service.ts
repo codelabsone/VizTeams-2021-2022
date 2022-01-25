@@ -49,8 +49,10 @@ export class DatabaseService {
   }
 
   addMember(newMember:Member) {
-    this.http.post(this.membersURL, newMember).subscribe();
-    this.getAllTeams().subscribe((teams) => this.teams.next(teams))
+    this.http.post(this.membersURL, newMember).subscribe(() => {
+      this.getAllTeams().subscribe((teams) => this.teams.next(teams))
+    });
+
   }
 
 
