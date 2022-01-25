@@ -6,6 +6,7 @@ import { DatabaseService } from 'src/app/database.service';
 
 import { MatDialogRef } from '@angular/material/dialog';
 import { Team } from 'src/app/shared/team.model';
+import { Member } from 'src/app/shared/member.model';
 
 @Component({
   selector: 'app-add-member',
@@ -16,13 +17,18 @@ export class AddMemberComponent implements OnInit {
 
   teams: Team[];
   selectedTeam: Team;
+  selectedTitle: string = 'Software Engineer';
   @Input() selectedTeamId;
   name = new FormControl('');
   description = new FormControl('');
   teamNameControl = new FormControl('', [Validators.required]);
   @ViewChild('form', { static: false }) addMemberForm: NgForm;
   images: {url?: string, download_url?: string}[];
+  chosenImage: string = '../../../assets/avatar.png'
+  titleOptions: string[] = ['Software Engineer', 'Quality Engineer', 'Team Lead']
+  newMember: Member = new Member('','','','');
 
+  selectedImgStyles: Record<string, string> = {};
 
 
 
@@ -39,7 +45,6 @@ export class AddMemberComponent implements OnInit {
 
     this.http.get('https://picsum.photos/v2/list?page=1&limit=5').subscribe((response: []) => {
       this.images = response;
-      console.log(this.images)
     })
   }
 
@@ -50,8 +55,28 @@ export class AddMemberComponent implements OnInit {
   };
 
   onSubmit() {
-    this.databaseService.addMember(this.addMemberForm.value);
+    let form = this.addMemberForm.value;
+    this.newMember.firstName = form.firstName;
+    this.newMember.lastName = form.lastName;
+    this.newMember.pathToPhoto = this.chosenImage;
+    this.newMember.title = this.selectedTitle;
+    this.newMember.team_id = this.selectedTeamId;
+    this.databaseService.addMember(this.newMember);
+
     this.dialogRef.close()
   }
+
+  handlePage(page){
+    this.http.get(`https://picsum.photos/v2/list?page=${page.pageIndex+1}&limit=5`).subscribe((response: []) => {
+      this.images = response;
+    })
+  }
+
+  onClickImage(image) {
+    this.chosenImage = image.download_url;
+    // this.styleObject(image);
+  }
+
+
 }
 

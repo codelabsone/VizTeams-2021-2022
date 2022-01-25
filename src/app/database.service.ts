@@ -43,13 +43,18 @@ export class DatabaseService {
   getTeam(id: number) {
     return this.http.get<Team>(this.teamsURL + '/' + id);
   }
-
   assignTeam(teamId: number, memberId: number) {
     let teamOb = {team_id: teamId, member_id: memberId}
     this.http.post(this.changeTeamURL, teamOb).subscribe()
   }
 
-  addMember(newMember) {}
+  addMember(newMember:Member) {
+    this.http.post(this.membersURL, newMember).subscribe(() => {
+      this.getAllTeams().subscribe((teams) => this.teams.next(teams))
+    });
+
+  }
+
 
   deleteTeam(id:number) {
     console.log(this.teamsURL + '/' + id);

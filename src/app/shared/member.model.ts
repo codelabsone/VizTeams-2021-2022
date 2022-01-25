@@ -1,13 +1,14 @@
 export class Member {
   constructor(
-    public id: number,
     public firstName: string,
     public lastName: string,
     public title: string,
     public pathToPhoto: string,
+    public id?: number,
     public created_at?: string,
     public updated_at?: string,
     public team?: any,
+    public team_id?: number
   ) {}
 }
 
