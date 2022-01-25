@@ -43,6 +43,12 @@ mat-expansion-panel-header {
 
   }
 
+  .noMembers{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .expansion-content{
     background-color: gray;
    }
@@ -58,6 +64,7 @@ mat-expansion-panel-header {
 
 .memberPhoto {
   width: 13%;
+  margin-right: 10px;
   &:hover {
     cursor: move;
   }

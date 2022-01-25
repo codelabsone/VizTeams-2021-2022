@@ -19,14 +19,14 @@ import { Member } from '../shared/member.model';
 })
 export class TeamListConComponent implements OnInit {
   teams: Team[] = [];
-
+  draggedOver: boolean = false;
   isTeamsLoaded: boolean = false;
   connectedTo = [];
 
   constructor(
     private databaseService: DatabaseService,
     private teamsService: TeamsService,
-    public teamDialog: MatDialog
+    public teamDialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -34,9 +34,12 @@ export class TeamListConComponent implements OnInit {
       this.teams = teams;
       this.isTeamsLoaded = true;
       this.updateConnectedTo();
-      console.log(this.connectedTo);
     });
   }
+
+toConsoleLog(event){
+  console.log(event)
+}
 
   updateConnectedTo() {
     for (let team of this.teams) {
@@ -47,6 +50,7 @@ export class TeamListConComponent implements OnInit {
   showTeamDetails(id: number) {
     this.teamsService.changeSelectedTeamId(id);
   }
+
 
   onAddTeam() {
     let addTeamRef = this.teamDialog.open(AddTeamComponent, {
@@ -60,17 +64,20 @@ export class TeamListConComponent implements OnInit {
     event.stopPropagation();
   }
 
-  onDropMember(event: CdkDragDrop<Member[]>) {
+  onDropMember(event: CdkDragDrop<Team>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
-        event.container.data,
+        event.container.data.members,
         event.previousIndex,
         event.currentIndex
       );
     } else {
+      let memId = event.previousContainer.data.members[event.previousIndex].id
+      let teamId = event.container.data.id
+      this.databaseService.assignTeam(teamId, memId)
       transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
+        event.previousContainer.data.members,
+        event.container.data.members,
         event.previousIndex,
         event.currentIndex
       );
