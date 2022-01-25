@@ -3,16 +3,17 @@
     // flex-direction: column;
     height: fit-content;
     justify-content: space-around;
-    width: calc(60vw - 48px);
+    width: 100%
   }
 //   mat-form-field {
 //     flex-basis: 45%;
 //   }
 
-  .firstNameField, .lastNameField, .titleField, .teamField{
-    width: calc(30vw - 24px);
-  }
+
   .infoField{
+    width: 100%;
+  }
+  form {
     width: 100%;
   }
 
@@ -27,6 +28,7 @@
   max-height: 80px;
   object-fit: cover;
   opacity: 0.5;
+  border-bottom: 2px solid transparent;
 }
 
 .selected-pic {
@@ -40,4 +42,8 @@
   width: 80%;
   margin: 20px 10%;
   justify-content: space-between;
+}
+
+.mat-form-field {
+  width: 50%;
 }

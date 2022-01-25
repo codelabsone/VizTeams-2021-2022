@@ -1,7 +1,7 @@
 
 <div class="prof-pics-cont">
   <div class="img-cont" *ngFor="let image of images">
-    <img class="profile-pics" [src]="image.download_url" (click)="onClickImage(image)" [ngStyle]="this.chosenImage === image.download_url ? {'opacity': '1', 'border-bottom': '2px solid', 'border-color': '#ff4e00'} : {}">
+    <img class="profile-pics" [src]="image.download_url" (click)="onClickImage(image)" [ngStyle]="this.chosenImage === image.download_url ? {'opacity': '1', 'border-bottom': '2px solid #ff4e00'} : {}">
   </div>
 </div>
 
