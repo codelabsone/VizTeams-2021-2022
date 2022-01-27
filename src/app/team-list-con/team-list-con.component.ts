@@ -22,12 +22,12 @@ export class TeamListConComponent implements OnInit {
   draggedOver: boolean = false;
   isTeamsLoaded: boolean = false;
   connectedTo = [];
-  dragging: boolean= false;
+  dragging: boolean = false;
 
   constructor(
     private databaseService: DatabaseService,
     private teamsService: TeamsService,
-    public teamDialog: MatDialog,
+    public teamDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -38,9 +38,9 @@ export class TeamListConComponent implements OnInit {
     });
   }
 
-toConsoleLog(event){
-  console.log(event)
-}
+  toConsoleLog(event) {
+    console.log(event);
+  }
 
   updateConnectedTo() {
     for (let team of this.teams) {
@@ -51,7 +51,6 @@ toConsoleLog(event){
   showTeamDetails(id: number) {
     this.teamsService.changeSelectedTeamId(id);
   }
-
 
   onAddTeam() {
     let addTeamRef = this.teamDialog.open(AddTeamComponent, {
@@ -73,9 +72,9 @@ toConsoleLog(event){
         event.currentIndex
       );
     } else {
-      let memId = event.previousContainer.data.members[event.previousIndex].id
-      let teamId = event.container.data.id
-      this.databaseService.assignTeam(teamId, memId)
+      let memId = event.previousContainer.data.members[event.previousIndex].id;
+      let teamId = event.container.data.id;
+      this.databaseService.assignTeam(teamId, memId);
       transferArrayItem(
         event.previousContainer.data.members,
         event.container.data.members,
@@ -93,4 +92,7 @@ toConsoleLog(event){
     addMemberRef.componentInstance.selectedTeamId = id;
   }
 
+  teamById(index: number, team: Team) {
+    return team.id;
+  }
 }

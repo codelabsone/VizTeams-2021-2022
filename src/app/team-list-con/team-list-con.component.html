@@ -23,7 +23,7 @@
     <div style="overflow: auto; height: 100%"  cdkDropListGroup >
       <mat-card-content>
         <!-- <mat-accordion> -->
-        <div *ngFor="let team of teams; let i = index">
+        <div *ngFor="let team of teams; let i = index; trackBy: teamById">
           <mat-expansion-panel (click)="showTeamDetails(team.id)" #panel (mouseenter)="dragging ? panel.open(): null" (mouseleave)="dragging ? panel.close(): null">
             <mat-expansion-panel-header>
               <mat-panel-title>{{ team.name }}</mat-panel-title>
