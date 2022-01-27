@@ -20,49 +20,54 @@
       <mat-divider></mat-divider>
     </div>
 
-    <div style="overflow: auto; height: 100%"  cdkDropListGroup >
+    <div style="overflow: auto; height: 100%" cdkDropListGroup>
       <mat-card-content>
         <!-- <mat-accordion> -->
         <div *ngFor="let team of teams; let i = index; trackBy: teamById">
-          <mat-expansion-panel (click)="showTeamDetails(team.id)" #panel (mouseenter)="dragging ? panel.open(): null" (mouseleave)="dragging ? panel.close(): null">
+          <mat-expansion-panel
+            (click)="showTeamDetails(team.id)"
+            #panel
+            (mouseenter)="dragging ? panel.open() : null"
+            (mouseleave)="dragging ? panel.close() : null"
+          >
             <mat-expansion-panel-header>
               <mat-panel-title>{{ team.name }}</mat-panel-title>
             </mat-expansion-panel-header>
 
-
             <div
-            (cdkDropListEntered)="draggedOver = true"
-            (cdkDropListExited)="draggedOver = false"
-            (cdkDropListDropped)="draggedOver = false"
+              (cdkDropListEntered)="draggedOver = true"
+              (cdkDropListExited)="draggedOver = false"
+              (cdkDropListDropped)="draggedOver = false"
               style="
                 display: flex;
                 justify-content: flex-start;
                 margin-top: 1rem;
               "
-              [id] = "team.id.toString()"
+              [id]="team.id.toString()"
               [cdkDropListData]="team"
               cdkDropList
               cdkDropListOrientation="horizontal"
               (cdkDropListDropped)="onDropMember($event)"
             >
-            <ng-container *ngIf="team.members.length < 1">
-              <div
-                style="
-                  display: flex;
-                  justify-content: center;
-                  font-weight: bold;
-                  padding-top: 1rem;
-                  width: 100%;
-                  margin: auto;
-                "
-              >
-                <div class="noMembers" *ngIf="!draggedOver">No Members on this Team.</div>
-              </div>
-           </ng-container>
+              <ng-container *ngIf="team.members.length < 1">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    font-weight: bold;
+                    padding-top: 1rem;
+                    width: 100%;
+                    margin: auto;
+                  "
+                >
+                  <div class="noMembers" *ngIf="!draggedOver">
+                    No Members on this Team.
+                  </div>
+                </div>
+              </ng-container>
               <ng-container *ngFor="let member of team.members">
                 <img
                   #templatePhoto
-                  style="width: 7%; cursor: move"
                   class="memberPhoto"
                   src="{{ member.pathToPhoto }}"
                   (error)="templatePhoto.src = 'assets/avatar.png'"
@@ -78,7 +83,9 @@
             </div>
             <mat-action-row class="addMember">
               <p class="counter">{{ team.members.length }} / 12</p>
-              <span class="material-icons" (click)="addMemberDialog(team.id)">person_add</span>
+              <span class="material-icons" (click)="addMemberDialog(team.id)"
+                >person_add</span
+              >
             </mat-action-row>
           </mat-expansion-panel>
           <mat-expansion-panel>
