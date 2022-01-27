@@ -12,20 +12,18 @@ mat-card {
   padding-right: 0;
 }
 
-
 // .mat-expansion-panel-content {
 //   color: pink;
 // }
 
 mat-expansion-panel {
   border-radius: 0 !important;
-
 }
-.mat-expansion-panel-body{
+.mat-expansion-panel-body {
   background-color: rgb(199, 199, 199) !important;
 }
-.addMember{
-  background-color: rgb(199, 199, 199)
+.addMember {
+  background-color: rgb(199, 199, 199);
 }
 
 // mat-expansion-panel-description{
@@ -34,18 +32,23 @@ mat-expansion-panel {
 mat-expansion-panel-header {
   border-radius: 0 !important;
   .actionRow {
-     // background-color: grey;
+    // background-color: grey;
     // position: fixed;
     // bottom: 0;
     // width: 46vw;
     display: flex;
     justify-content: end;
-
   }
 
-  .expansion-content{
+  .noMembers {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .expansion-content {
     background-color: gray;
-   }
+  }
 
   .material-icons {
     margin: 15px;
@@ -57,15 +60,18 @@ mat-expansion-panel-header {
 }
 
 .memberPhoto {
-  width: 13%;
+  width: 7%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin-right: 10px;
   &:hover {
     cursor: move;
   }
 }
 
 .material-icons {
-  color: rgba(69, 90, 100, .87);
-  cursor: pointer
+  color: rgba(69, 90, 100, 0.87);
+  cursor: pointer;
 }
 
 .counter {

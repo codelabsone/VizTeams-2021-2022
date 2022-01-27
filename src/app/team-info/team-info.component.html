@@ -12,11 +12,7 @@
 
     <mat-card-content class="memberContainer">
       <div class="memberContent">
-        <img
-          src="{{ activeMember.pathToPhoto }}"
-          alt="member photo"
-          style="max-width: 100%"
-        />
+        <img src="{{ activeMember.pathToPhoto }}" alt="member photo" />
         <div class="memberInfo">
           <div class="mat-title" style="margin-bottom: 0">
             {{ activeMember.firstName }} {{ activeMember.lastName }}
@@ -31,16 +27,21 @@
     <mat-card-actions>
       <mat-divider></mat-divider>
       <div class="icons">
-        <mat-icon matTooltip="Edit {{ activeMember.firstName }}" matTooltipPosition="above">
+        <mat-icon
+          matTooltip="Edit {{ activeMember.firstName }}"
+          matTooltipPosition="above"
+        >
           edit
         </mat-icon>
-        <mat-icon matTooltip="Archive {{ activeMember.firstName }}" matTooltipPosition="above">
+        <mat-icon
+          matTooltip="Archive {{ activeMember.firstName }}"
+          matTooltipPosition="above"
+        >
           archive
         </mat-icon>
       </div>
     </mat-card-actions>
   </ng-container>
-
 
   <ng-container *ngIf="activeMember === null || undefined">
     <mat-card-title *ngIf="activeTeam === null || undefined" class="teambox"
@@ -68,11 +69,19 @@
 
       <mat-card-actions>
         <mat-divider></mat-divider>
-        <mat-icon matTooltip="Archive {{activeTeam.name}}" matTooltipPosition="above" (click)='onArchiveTeam()'>archive</mat-icon>
-        <mat-icon matTooltip="Edit {{activeTeam.name}}" (click)="onEditTeam()">edit</mat-icon>
-        <mat-icon matTooltip="{{activeTeam.name}}'s History">history</mat-icon>
+        <mat-icon
+          matTooltip="Archive {{ activeTeam.name }}"
+          matTooltipPosition="above"
+          (click)="onArchiveTeam()"
+          >archive</mat-icon
+        >
+        <mat-icon matTooltip="Edit {{ activeTeam.name }}" (click)="onEditTeam()"
+          >edit</mat-icon
+        >
+        <mat-icon matTooltip="{{ activeTeam.name }}'s History"
+          >history</mat-icon
+        >
       </mat-card-actions>
-
     </ng-container>
   </ng-container>
 </mat-card>

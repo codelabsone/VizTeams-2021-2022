@@ -19,9 +19,10 @@ import { Member } from '../shared/member.model';
 })
 export class TeamListConComponent implements OnInit {
   teams: Team[] = [];
-
+  draggedOver: boolean = false;
   isTeamsLoaded: boolean = false;
   connectedTo = [];
+  dragging: boolean = false;
 
   constructor(
     private databaseService: DatabaseService,
@@ -34,8 +35,11 @@ export class TeamListConComponent implements OnInit {
       this.teams = teams;
       this.isTeamsLoaded = true;
       this.updateConnectedTo();
-      console.log(this.connectedTo);
     });
+  }
+
+  toConsoleLog(event) {
+    console.log(event);
   }
 
   updateConnectedTo() {
@@ -60,17 +64,20 @@ export class TeamListConComponent implements OnInit {
     event.stopPropagation();
   }
 
-  onDropMember(event: CdkDragDrop<Member[]>) {
+  onDropMember(event: CdkDragDrop<Team>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
-        event.container.data,
+        event.container.data.members,
         event.previousIndex,
         event.currentIndex
       );
     } else {
+      let memId = event.previousContainer.data.members[event.previousIndex].id;
+      let teamId = event.container.data.id;
+      this.databaseService.assignTeam(teamId, memId);
       transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
+        event.previousContainer.data.members,
+        event.container.data.members,
         event.previousIndex,
         event.currentIndex
       );
@@ -80,8 +87,12 @@ export class TeamListConComponent implements OnInit {
   addMemberDialog(id) {
     const addMemberRef = this.teamDialog.open(AddMemberComponent, {
       height: 'auto',
-      width: '60vw',
+      width: '50vw',
     });
     addMemberRef.componentInstance.selectedTeamId = id;
+  }
+
+  teamById(index: number, team: Team) {
+    return team.id;
   }
 }

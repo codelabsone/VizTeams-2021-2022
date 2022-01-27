@@ -12,6 +12,7 @@ export class DatabaseService {
   teams: ReplaySubject<Team[]> = new ReplaySubject(1);
   teamsURL = 'https://vizteams-api.herokuapp.com/teams';
   membersURL = 'https://vizteams-api.herokuapp.com/members';
+  changeTeamURL = 'https://vizteams-api.herokuapp.com/change-team'
 
   constructor(private http: HttpClient) {
     this.getAllTeams().subscribe((teams) => this.teams.next(teams));
@@ -42,8 +43,18 @@ export class DatabaseService {
   getTeam(id: number) {
     return this.http.get<Team>(this.teamsURL + '/' + id);
   }
+  assignTeam(teamId: number, memberId: number) {
+    let teamOb = {team_id: teamId, member_id: memberId}
+    this.http.post(this.changeTeamURL, teamOb).subscribe()
+  }
 
-  addMember(newMember) {}
+  addMember(newMember:Member) {
+    this.http.post(this.membersURL, newMember).subscribe(() => {
+      this.getAllTeams().subscribe((teams) => this.teams.next(teams))
+    });
+
+  }
+
 
   deleteTeam(id:number) {
     console.log(this.teamsURL + '/' + id);
