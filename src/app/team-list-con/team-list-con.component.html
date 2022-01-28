@@ -84,8 +84,8 @@
             </div>
             <mat-action-row class="addMember">
               <p class="counter">{{ team.members.length }} / 12</p>
-              <span class="material-icons" (click)="addMemberDialog(team.id)"
-                >person_add</span
+              <button [disabled]="team.members.length >= 12" class="material-icons add-person"  (click)="addMemberDialog(team.id)"
+                >person_add</button
               >
             </mat-action-row>
           </mat-expansion-panel>
