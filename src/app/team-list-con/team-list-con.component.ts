@@ -65,22 +65,24 @@ export class TeamListConComponent implements OnInit {
   }
 
   onDropMember(event: CdkDragDrop<Team>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data.members,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      let memId = event.previousContainer.data.members[event.previousIndex].id;
-      let teamId = event.container.data.id;
-      this.databaseService.assignTeam(teamId, memId);
-      transferArrayItem(
-        event.previousContainer.data.members,
-        event.container.data.members,
-        event.previousIndex,
-        event.currentIndex
-      );
+    if ((event.container.data.members.length + 1) <= 12) {
+      if (event.previousContainer === event.container) {
+        moveItemInArray(
+          event.container.data.members,
+          event.previousIndex,
+          event.currentIndex
+        );
+      } else {
+        let memId = event.previousContainer.data.members[event.previousIndex].id;
+        let teamId = event.container.data.id;
+        this.databaseService.assignTeam(teamId, memId);
+        transferArrayItem(
+          event.previousContainer.data.members,
+          event.container.data.members,
+          event.previousIndex,
+          event.currentIndex
+        );
+    }
     }
   }
 
