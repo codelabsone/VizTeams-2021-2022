@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DatabaseService } from '../database.service';
+import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
 @Component({
@@ -29,4 +30,9 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  onSignIn() {
+    const dialogRef = this.dialog.open(SignInComponent, {
+      width: '500px'
+    })
+  }
 }

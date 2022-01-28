@@ -11,6 +11,8 @@ import {
 } from '@angular/cdk/drag-drop';
 import { AddMemberComponent } from './add-member/add-member.component';
 import { Member } from '../shared/member.model';
+import { MatExpansionPanel } from '@angular/material/expansion';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-team-list-con',
@@ -21,8 +23,8 @@ export class TeamListConComponent implements OnInit {
   teams: Team[] = [];
   draggedOver: boolean = false;
   isTeamsLoaded: boolean = false;
-  connectedTo = [];
   dragging: boolean = false;
+  amountError: boolean = false;
 
   constructor(
     private databaseService: DatabaseService,
@@ -34,18 +36,11 @@ export class TeamListConComponent implements OnInit {
     this.databaseService.teams.subscribe((teams) => {
       this.teams = teams;
       this.isTeamsLoaded = true;
-      this.updateConnectedTo();
     });
   }
 
   toConsoleLog(event) {
     console.log(event);
-  }
-
-  updateConnectedTo() {
-    for (let team of this.teams) {
-      this.connectedTo.push(team.id.toString());
-    }
   }
 
   showTeamDetails(id: number) {
@@ -65,23 +60,60 @@ export class TeamListConComponent implements OnInit {
   }
 
   onDropMember(event: CdkDragDrop<Team>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data.members,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      let memId = event.previousContainer.data.members[event.previousIndex].id;
-      let teamId = event.container.data.id;
-      this.databaseService.assignTeam(teamId, memId);
-      transferArrayItem(
-        event.previousContainer.data.members,
-        event.container.data.members,
-        event.previousIndex,
-        event.currentIndex
-      );
+    if ((event.container.data.members.length + 1) <= 12) {
+      if (event.previousContainer === event.container) {
+        moveItemInArray(
+          event.container.data.members,
+          event.previousIndex,
+          event.currentIndex
+          );
+      }
+      else {
+        let memId = event.previousContainer.data.members[event.previousIndex].id;
+        let teamId = event.container.data.id;
+        this.databaseService.assignTeam(teamId, memId);
+        transferArrayItem(
+          event.previousContainer.data.members,
+          event.container.data.members,
+          event.previousIndex,
+          event.currentIndex
+        );
     }
+    } else {
+      this.amountError = true
+      setTimeout(() => {
+        this.amountError = false;
+      }, 3000)
+    }
+  }
+
+  getErrorMessage() {
+    if (this.amountError) {
+      console.log('this is an error')
+    }
+    // setTimeout(() => {
+    //   return  'You must enter a value'
+    // }, 3000);
+  }
+
+  timeout;
+  openedOnDragOver: MatExpansionPanel[] = [];
+
+  onDragOverExpansion(panel: MatExpansionPanel, direction: 'enter' | 'leave') {
+    if (direction === 'enter' && !panel.expanded) {
+      this.timeout = setTimeout(() => {
+        panel.open();
+        this.openedOnDragOver.push(panel);
+      }, 500);
+    } else if (direction === 'leave') {
+      clearTimeout(this.timeout);
+    }
+  }
+
+  dragEnded(event) {
+    this.dragging = false;
+    this.openedOnDragOver.forEach((panel) => panel.close());
+    this.openedOnDragOver = [];
   }
 
   addMemberDialog(id) {

@@ -27,8 +27,8 @@
           <mat-expansion-panel
             (click)="showTeamDetails(team.id)"
             #panel
-            (mouseenter)="dragging ? panel.open() : null"
-            (mouseleave)="dragging ? panel.close() : null"
+            (mouseenter)="dragging ? onDragOverExpansion(panel, 'enter') : null"
+            (mouseleave)="dragging ? onDragOverExpansion(panel, 'leave') : null"
           >
             <mat-expansion-panel-header>
               <mat-panel-title>{{ team.name }}</mat-panel-title>
@@ -42,6 +42,7 @@
                 display: flex;
                 justify-content: flex-start;
                 margin-top: 1rem;
+                min-height: 10px;
               "
               [id]="team.id.toString()"
               [cdkDropListData]="team"
@@ -77,14 +78,15 @@
                   (click)="onMemberSelect(member.id)"
                   cdkDrag
                   (cdkDragStarted)="dragging = true"
-                  (cdkDragEnded)="dragging = false"
+                  (cdkDragEnded)="dragEnded($event)"
                 />
               </ng-container>
             </div>
             <mat-action-row class="addMember">
+              <mat-error class="sizeLimit" *ngIf="amountError">Team size limited to 12 members</mat-error>
               <p class="counter">{{ team.members.length }} / 12</p>
-              <span class="material-icons" (click)="addMemberDialog(team.id)"
-                >person_add</span
+              <button [disabled]="team.members.length >= 12" class="material-icons add-person"  (click)="addMemberDialog(team.id)"
+                >person_add</button
               >
             </mat-action-row>
           </mat-expansion-panel>
