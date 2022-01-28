@@ -1,23 +1,32 @@
-<form class="signUpForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
+<!-- <form class="signUpForm" (ngSubmit)="onSubmit(form)" #form="ngForm"> -->
 
 <mat-dialog-content>
-        <h2 mat-dialog-title style="text-align: center;">Sign up</h2>
-    <div class="inputfields-boxs">
-      <mat-form-field>
-        <mat-label>Enter your email</mat-label>
-            <input matInput placeholder="email@example.com" type="email" required>
-        </mat-form-field>
+  <h2 mat-dialog-title style="text-align: center">Sign up</h2>
+  <div class="inputfields-boxs">
+    <mat-form-field>
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="email@example.com" type="email" required />
+    </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Password</mat-label>
-                <input  matInput  placeholder="your password" type="password"  name="password"  required>
-        </mat-form-field>
-    </div>
-      <div class="su-btns">
-        <button mat-button type="reset" (click)="onCancel()">Cancel</button>
-        <button mat-button type="Submit" [disabled]="!signUpForm.form.touched || signUpForm.form.invalid" >Submit</button>
-      </div>
-
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        placeholder="your password"
+        type="password"
+        name="password"
+        required
+      />
+    </mat-form-field>
+  </div>
+  <div class="su-btns">
+    <button mat-button type="reset" (click)="onCancel()">Cancel</button>
+    <button
+      mat-button
+      type="Submit"
+      [disabled]="!signUpForm.form.touched || signUpForm.form.invalid"
+    >
+      Submit
+    </button>
+  </div>
 </mat-dialog-content>
-
-

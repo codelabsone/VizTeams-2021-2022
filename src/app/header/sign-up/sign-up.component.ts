@@ -6,19 +6,17 @@ import { DatabaseService } from 'src/app/database.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  signUpForm: any
-
+  signUpForm: any;
 
   constructor(
     private dialogRef: MatDialogRef<SignUpComponent>,
-    private db: DatabaseService,
-  ) { }
+    private db: DatabaseService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit(signUpForm: NgForm) {
     // let email = signUpForm.value.email
@@ -34,5 +32,4 @@ export class SignUpComponent implements OnInit {
   onCancel() {
     this.dialogRef.close();
   }
-
 }
