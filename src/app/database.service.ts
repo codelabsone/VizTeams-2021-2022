@@ -52,9 +52,7 @@ export class DatabaseService {
     this.http.post(this.membersURL, newMember).subscribe(() => {
       this.getAllTeams().subscribe((teams) => this.teams.next(teams))
     });
-
   }
-
 
   deleteTeam(id:number) {
     console.log(this.teamsURL + '/' + id);
@@ -63,5 +61,8 @@ export class DatabaseService {
         this.teams.next(teams);
       })
     });
+  }
+
+  signIn(email: string, password: string) {
   }
 }
