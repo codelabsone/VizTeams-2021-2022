@@ -7,6 +7,7 @@ import { take } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { TeamEditComponent } from './team-edit/team-edit.component';
 import { ArchiveDialogComponent } from './archive-dialog/archive-dialog.component';
+import { AddMemberComponent } from '../team-list-con/add-member/add-member.component';
 
 @Component({
   selector: 'app-team-info',
@@ -48,16 +49,24 @@ export class TeamInfoComponent implements OnInit {
     let dialogRef = this.dialog.open(ArchiveDialogComponent, {
       height: 'fitcontent',
       width: 'fitcontent',
-      data: {team: this.activeTeam}
-    })
-    dialogRef.afterClosed().subscribe
+      data: { team: this.activeTeam },
+    });
+    dialogRef.afterClosed().subscribe;
   }
 
   ngOnDestroy() {}
 
   onEditTeam() {
     const dialogRef = this.dialog.open(TeamEditComponent, {
-      width: '700px'
-    })
+      width: '700px',
+    });
+  }
+
+  onEditMember(activeMember) {
+    const addMemberRef = this.dialog.open(AddMemberComponent, {
+      height: 'auto',
+      width: '50vw',
+      data: activeMember,
+    });
   }
 }

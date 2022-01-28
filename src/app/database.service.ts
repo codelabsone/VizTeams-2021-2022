@@ -39,31 +39,39 @@ export class DatabaseService {
   }
 
   editTeam(id: number, team: any) {
-    return this.http.patch<Team>(this.teamsURL + '/' + id, team)
-
-
+    return this.http.patch<Team>(this.teamsURL + '/' + id, team);
   }
 
   getTeam(id: number) {
     return this.http.get<Team>(this.teamsURL + '/' + id);
   }
   assignTeam(teamId: number, memberId: number) {
-    let teamOb = {team_id: teamId, member_id: memberId}
-    this.http.post(this.changeTeamURL, teamOb).subscribe()
+    let teamOb = { team_id: teamId, member_id: memberId };
+    this.http.post(this.changeTeamURL, teamOb).subscribe();
   }
 
-  addMember(newMember:Member) {
+  addMember(newMember: Member) {
     this.http.post(this.membersURL, newMember).subscribe(() => {
-      this.getAllTeams().subscribe((teams) => this.teams.next(teams))
+      this.getAllTeams().subscribe((teams) => this.teams.next(teams));
     });
   }
 
-  deleteTeam(id:number) {
+  editMember(editedMember: Member, memberId: number) {
+    this.http
+      .patch(this.membersURL + '/' + memberId, editedMember)
+      .subscribe(() => {
+        this.getAllTeams().subscribe((teams) => {
+          this.teams.next(teams);
+        });
+      });
+  }
+
+  deleteTeam(id: number) {
     console.log(this.teamsURL + '/' + id);
     this.http.delete(this.teamsURL + '/' + id).subscribe(() => {
       this.http.get<Team[]>(this.teamsURL).subscribe((teams) => {
         this.teams.next(teams);
-      })
+      });
     });
   }
 
