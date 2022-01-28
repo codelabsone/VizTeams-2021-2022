@@ -83,7 +83,7 @@
               </ng-container>
             </div>
             <mat-action-row class="addMember">
-              <mat-error *ngIf="team.members.length >= 12">Team size limited to 12 members </mat-error>
+              <mat-error class="sizeLimit" *ngIf="amountError">Team size limited to 12 members</mat-error>
               <p class="counter">{{ team.members.length }} / 12</p>
               <button [disabled]="team.members.length >= 12" class="material-icons add-person"  (click)="addMemberDialog(team.id)"
                 >person_add</button
