@@ -6,34 +6,31 @@ import { DatabaseService } from 'src/app/database.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  signUpForm: any
-
+  signUpForm: any;
 
   constructor(
     private dialogRef: MatDialogRef<SignUpComponent>,
-    private db: DatabaseService,
-  ) { }
+    private db: DatabaseService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  onSubmit(signUpForm: NgForm) {
-    let email = signUpForm.value.email
-    let password = signUpForm.value.password
-    if (signUpForm.valid) {
-      this.db.signUp( email, password).subscribe(() => {
-          location.reload();
-      });
-      this.dialogRef.close();
+  // onSubmit(signUpForm: NgForm) {
+  //   let email = signUpForm.value.email
+  //   let password = signUpForm.value.password
+  //   if (signUpForm.valid) {
+  //     this.db.signUp( email, password).subscribe(() => {
+  //         location.reload();
+  //     });
+  //     this.dialogRef.close();
 
-    }
-  }
+  //   }
+  // }
 
   onCancel() {
     this.dialogRef.close();
   }
-
 }

@@ -11,6 +11,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { AddMemberComponent } from './add-member/add-member.component';
 import { Member } from '../shared/member.model';
+import { MatExpansionPanel } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-team-list-con',
@@ -21,7 +22,6 @@ export class TeamListConComponent implements OnInit {
   teams: Team[] = [];
   draggedOver: boolean = false;
   isTeamsLoaded: boolean = false;
-  connectedTo = [];
   dragging: boolean = false;
 
   constructor(
@@ -34,18 +34,11 @@ export class TeamListConComponent implements OnInit {
     this.databaseService.teams.subscribe((teams) => {
       this.teams = teams;
       this.isTeamsLoaded = true;
-      this.updateConnectedTo();
     });
   }
 
   toConsoleLog(event) {
     console.log(event);
-  }
-
-  updateConnectedTo() {
-    for (let team of this.teams) {
-      this.connectedTo.push(team.id.toString());
-    }
   }
 
   showTeamDetails(id: number) {
@@ -82,6 +75,26 @@ export class TeamListConComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  timeout;
+  openedOnDragOver: MatExpansionPanel[] = [];
+
+  onDragOverExpansion(panel: MatExpansionPanel, direction: 'enter' | 'leave') {
+    if (direction === 'enter') {
+      this.timeout = setTimeout(() => {
+        panel.open();
+        this.openedOnDragOver.push(panel);
+      }, 800);
+    } else if (direction === 'leave') {
+      clearTimeout(this.timeout);
+    }
+  }
+
+  dragEnded(event) {
+    this.dragging = false;
+    this.openedOnDragOver.forEach((panel) => panel.close());
+    this.openedOnDragOver = [];
   }
 
   addMemberDialog(id) {
