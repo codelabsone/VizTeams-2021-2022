@@ -81,11 +81,11 @@ export class TeamListConComponent implements OnInit {
   openedOnDragOver: MatExpansionPanel[] = [];
 
   onDragOverExpansion(panel: MatExpansionPanel, direction: 'enter' | 'leave') {
-    if (direction === 'enter') {
+    if (direction === 'enter' && !panel.expanded) {
       this.timeout = setTimeout(() => {
         panel.open();
         this.openedOnDragOver.push(panel);
-      }, 800);
+      }, 500);
     } else if (direction === 'leave') {
       clearTimeout(this.timeout);
     }
@@ -98,7 +98,7 @@ export class TeamListConComponent implements OnInit {
   }
 
   addMemberDialog(id) {
-      const addMemberRef = this.teamDialog.open(AddMemberComponent, {
+    const addMemberRef = this.teamDialog.open(AddMemberComponent, {
       height: 'auto',
       width: '50vw',
     });
