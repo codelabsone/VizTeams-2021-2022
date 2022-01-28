@@ -24,9 +24,9 @@ export class SignUpComponent implements OnInit {
     let email = signUpForm.value.email
     let password = signUpForm.value.password
     if (signUpForm.valid) {
-      this.db.signUp( email, password).subscribe(() => {
-          location.reload();
-      });
+      this.db.signUp(email, password);
+
+          // location.reload();
       this.dialogRef.close();
 
     }

@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { Member } from './shared/member.model';
+import { User } from './shared/user.model';
 
 import { Team } from './shared/team.model';
 
@@ -12,7 +13,10 @@ export class DatabaseService {
   teams: ReplaySubject<Team[]> = new ReplaySubject(1);
   teamsURL = 'https://vizteams-api.herokuapp.com/teams';
   membersURL = 'https://vizteams-api.herokuapp.com/members';
-  changeTeamURL = 'https://vizteams-api.herokuapp.com/change-team'
+  changeTeamURL = 'https://vizteams-api.herokuapp.com/change-team';
+  signupURL = 'https://vizteams-api.herokuapp.com/sign-up';
+
+  currentUser = new Subject;
 
   constructor(private http: HttpClient) {
     this.getAllTeams().subscribe((teams) => this.teams.next(teams));
@@ -64,4 +68,17 @@ export class DatabaseService {
       })
     });
   }
+
+  signUp(email: string, password: string) {
+    return this.http.post<User>(this.signupURL, {
+      email: email,
+      password: password
+    }).subscribe(resData => {
+      localStorage.setItem('userData', JSON.stringify(resData));
+
+      this.currentUser.next(JSON.parse(localStorage.getItem('userData')));
+
+    });
+  }
+
 }
