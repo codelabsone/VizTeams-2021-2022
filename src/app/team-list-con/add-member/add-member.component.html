@@ -24,13 +24,15 @@
 <div class="addMemberFields">
   <form class="memberAddForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
     <div style="display: flex; width: 100%; gap: 10px">
+      <!--! FIRST NAME  -->
+
       <mat-form-field appearance="standard" class="firstNameField">
         <mat-label>First Name</mat-label>
         <input
           matInput
           class="form-control"
           id="firstName"
-          ngModel
+          [ngModel]="member.firstName"
           name="firstName"
           #firstName
           required
@@ -38,13 +40,16 @@
         <mat-error *ngIf="form.invalid">Please enter a value</mat-error>
       </mat-form-field>
 
+      <!--! LAST NAME -->
+
       <mat-form-field appearance="standard" class="lastNameField">
         <mat-label>Last Name</mat-label>
         <input
           matInput
           class="form-control"
           id="lastName"
-          ngModel
+          [ngModel]="member.lastName"
+          #lastName
           name="lastName"
           required
         />
@@ -52,6 +57,8 @@
       </mat-form-field>
     </div>
     <div style="display: flex; width: 100%; gap: 10px">
+      <!--! TITLE  -->
+
       <mat-form-field appearance="standard" class="titleField">
         <mat-label>Title</mat-label>
         <mat-select [(value)]="selectedTitle" name="selectedTitle">
@@ -63,6 +70,8 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <!--! TEAM  -->
 
       <mat-form-field appearance="standard" class="teamField">
         <mat-label>Team </mat-label>

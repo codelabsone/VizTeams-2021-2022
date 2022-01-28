@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { FormControl, NgForm, Validators, NgModel } from '@angular/forms';
 
 import { DatabaseService } from 'src/app/database.service';
 
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Team } from 'src/app/shared/team.model';
 import { Member } from 'src/app/shared/member.model';
 
@@ -17,6 +17,7 @@ export class AddMemberComponent implements OnInit {
   teams: Team[];
   selectedTeam: Team;
   selectedTitle: string = 'Software Engineer';
+  member: Member = new Member('', '', '', '');
   @Input() selectedTeamId;
   name = new FormControl('');
   description = new FormControl('');
@@ -39,6 +40,7 @@ export class AddMemberComponent implements OnInit {
   selectedImgStyles: Record<string, string> = {};
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public editedMember: Member,
     private dialogRef: MatDialogRef<AddMemberComponent>,
     private http: HttpClient,
     private databaseService: DatabaseService
@@ -59,6 +61,7 @@ export class AddMemberComponent implements OnInit {
           ] = `https://picsum.photos/id/${imageObject.id}/300/300.webp`;
         });
       });
+    this.checkEditMember();
   }
 
   onCancel() {
@@ -67,13 +70,21 @@ export class AddMemberComponent implements OnInit {
   }
 
   onSubmit(addMemberForm: NgForm) {
-    if (addMemberForm.valid) {
-      let form = this.addMemberForm.value;
-      this.newMember.firstName = form.firstName;
-      this.newMember.lastName = form.lastName;
-      this.newMember.pathToPhoto = this.chosenImage;
-      this.newMember.title = this.selectedTitle;
-      this.newMember.team_id = this.selectedTeamId;
+    // Put all the basic info into the newMember variable
+    let form = this.addMemberForm.value;
+    this.newMember.firstName = form.firstName;
+    this.newMember.lastName = form.lastName;
+    this.newMember.pathToPhoto = this.chosenImage;
+    this.newMember.title = this.selectedTitle;
+    this.newMember.team_id = this.selectedTeamId;
+
+    if (addMemberForm.valid && this.editedMember) {
+      // Populate the member ID so the proper member gets edited, then send it through
+      this.databaseService.editMember(this.newMember, this.editedMember.id);
+      this.dialogRef.close();
+      console.log(this.newMember);
+    } else if (addMemberForm.valid) {
+      // Populate the team_id, so the new member has a team assigned to them
       this.databaseService.addMember(this.newMember);
       this.dialogRef.close();
     }
@@ -95,5 +106,14 @@ export class AddMemberComponent implements OnInit {
   onClickImage(image) {
     this.chosenImage = image.smallUrl;
     // this.styleObject(image);
+  }
+
+  checkEditMember() {
+    if (this.editedMember != null || undefined) {
+      this.member = this.editedMember;
+      this.selectedTitle = this.editedMember.title;
+      this.selectedTeamId = this.editedMember.team.id;
+      this.chosenImage = this.editedMember.pathToPhoto;
+    }
   }
 }
