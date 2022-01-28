@@ -70,4 +70,6 @@ export class DatabaseService {
       });
     });
   }
+
+  signIn(email: string, password: string) {}
 }

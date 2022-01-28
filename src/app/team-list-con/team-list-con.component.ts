@@ -12,6 +12,7 @@ import {
 import { AddMemberComponent } from './add-member/add-member.component';
 import { Member } from '../shared/member.model';
 import { MatExpansionPanel } from '@angular/material/expansion';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-team-list-con',
@@ -23,6 +24,7 @@ export class TeamListConComponent implements OnInit {
   draggedOver: boolean = false;
   isTeamsLoaded: boolean = false;
   dragging: boolean = false;
+  amountError: boolean = false;
 
   constructor(
     private databaseService: DatabaseService,
@@ -58,23 +60,40 @@ export class TeamListConComponent implements OnInit {
   }
 
   onDropMember(event: CdkDragDrop<Team>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data.members,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      let memId = event.previousContainer.data.members[event.previousIndex].id;
-      let teamId = event.container.data.id;
-      this.databaseService.assignTeam(teamId, memId);
-      transferArrayItem(
-        event.previousContainer.data.members,
-        event.container.data.members,
-        event.previousIndex,
-        event.currentIndex
-      );
+    if ((event.container.data.members.length + 1) <= 12) {
+      if (event.previousContainer === event.container) {
+        moveItemInArray(
+          event.container.data.members,
+          event.previousIndex,
+          event.currentIndex
+          );
+      }
+      else {
+        let memId = event.previousContainer.data.members[event.previousIndex].id;
+        let teamId = event.container.data.id;
+        this.databaseService.assignTeam(teamId, memId);
+        transferArrayItem(
+          event.previousContainer.data.members,
+          event.container.data.members,
+          event.previousIndex,
+          event.currentIndex
+        );
     }
+    } else {
+      this.amountError = true
+      setTimeout(() => {
+        this.amountError = false;
+      }, 3000)
+    }
+  }
+
+  getErrorMessage() {
+    if (this.amountError) {
+      console.log('this is an error')
+    }
+    // setTimeout(() => {
+    //   return  'You must enter a value'
+    // }, 3000);
   }
 
   timeout;
