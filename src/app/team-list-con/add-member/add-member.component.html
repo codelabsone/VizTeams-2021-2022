@@ -9,18 +9,20 @@
 
 
 <div class="addMemberFields">
-  <form class="memberAddForm" (ngSubmit)="onSubmit()" #form="ngForm">
+  <form class="memberAddForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
     <div style="display: flex; width: 100%; gap: 10px" >
 
 
         <mat-form-field appearance="standard" class="firstNameField">
         <mat-label>First Name</mat-label>
-        <input matInput class="form-control" id="firstName" ngModel name="firstName">
+        <input matInput class="form-control" id="firstName" ngModel name="firstName" #firstName required>
+        <mat-error *ngIf="form.invalid">Please enter a value</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="standard" class="lastNameField">
         <mat-label>Last Name</mat-label>
-        <input matInput class="form-control" id="lastName" ngModel name="lastName">
+        <input matInput class="form-control" id="lastName" ngModel name="lastName" required>
+        <mat-error *ngIf="form.invalid">Please enter a value</mat-error>
         </mat-form-field>
 
       </div>
@@ -29,7 +31,7 @@
         <mat-form-field appearance="standard" class="titleField">
         <mat-label>Title</mat-label>
         <mat-select [(value)]='selectedTitle' name="selectedTitle">
-            <mat-option *ngFor="let option of titleOptions" [value]="option">{{ option }}</mat-option>
+            <mat-option *ngFor="let option of titleOptions" [value]="option"  required>{{ option }} </mat-option>
 
         </mat-select>
         </mat-form-field>
@@ -38,7 +40,7 @@
         <mat-form-field appearance="standard" class="teamField">
         <mat-label>Team </mat-label>
         <mat-select [(value)]="selectedTeamId" >
-          <mat-option *ngFor="let team of teams" [value]="team.id">{{ team.name }}</mat-option>
+          <mat-option *ngFor="let team of teams" [value]="team.id" required>{{ team.name }}</mat-option>
         </mat-select>
         </mat-form-field>
       </div>

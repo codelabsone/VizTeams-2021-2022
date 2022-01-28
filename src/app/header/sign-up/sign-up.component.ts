@@ -21,15 +21,14 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(signUpForm: NgForm) {
-    let email = signUpForm.value.email
-    let password = signUpForm.value.password
-    if (signUpForm.valid) {
-      this.db.signUp( email, password).subscribe(() => {
-          location.reload();
-      });
-      this.dialogRef.close();
-
-    }
+    // let email = signUpForm.value.email
+    // let password = signUpForm.value.password
+    // if (signUpForm.valid) {
+    //   this.db.signUp( email, password).subscribe(() => {
+    //       location.reload();
+    //   });
+    //   this.dialogRef.close();
+    // }
   }
 
   onCancel() {

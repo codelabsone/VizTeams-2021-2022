@@ -54,16 +54,18 @@ export class AddMemberComponent implements OnInit {
     console.log(this.selectedTeamId)
   };
 
-  onSubmit() {
-    let form = this.addMemberForm.value;
-    this.newMember.firstName = form.firstName;
-    this.newMember.lastName = form.lastName;
-    this.newMember.pathToPhoto = this.chosenImage;
-    this.newMember.title = this.selectedTitle;
-    this.newMember.team_id = this.selectedTeamId;
-    this.databaseService.addMember(this.newMember);
+  onSubmit(addMemberForm: NgForm) {
+    if (addMemberForm.valid) {
+      let form = this.addMemberForm.value;
+      this.newMember.firstName = form.firstName;
+      this.newMember.lastName = form.lastName;
+      this.newMember.pathToPhoto = this.chosenImage;
+      this.newMember.title = this.selectedTitle;
+      this.newMember.team_id = this.selectedTeamId;
+      this.databaseService.addMember(this.newMember);
+      this.dialogRef.close()
+    }
 
-    this.dialogRef.close()
   }
 
   handlePage(page){
