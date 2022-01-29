@@ -23,7 +23,7 @@ export class TeamEditComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-  this.editTeam = this.teamService.selectedTeam
+  this.editTeam = this.teamService.selectedTeam.value
   }
 
   onSubmit(editForm: NgForm) {
@@ -31,7 +31,9 @@ export class TeamEditComponent implements OnInit {
     let teamName = editForm.value.name
     if (editForm.valid && teamName.trim().length != 0) {
       this.db.editTeam(teamId, editForm.value).subscribe(() => {
-          location.reload();
+          // location.reload();
+          this.teamService.updateTeamDetails()
+
       });
       this.dialogRef.close();
 

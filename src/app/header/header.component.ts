@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DatabaseService } from '../database.service';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -11,7 +11,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 })
 export class HeaderComponent implements OnInit {
 
-  currentUser;
+  currentUser = null;
+
 
   constructor(
     public dialog: MatDialog,
@@ -19,20 +20,39 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.db.currentUser.subscribe(resData => {
-      this.currentUser = resData;
-    })
+    this.loadUser()
+  }
+
+  loadUser(){
+    var localStorageUser = localStorage.getItem('userData')
+    if (localStorageUser != undefined || localStorageUser != null) {
+      this.currentUser = JSON.parse(localStorageUser).user;
+    }
   }
 
   onSignUp() {
     const dialogRef = this.dialog.open(SignUpComponent, {
       width: '500px'
     })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true){
+        this.loadUser();
+      }
+    })
   }
+
+
 
   onSignIn() {
     const dialogRef = this.dialog.open(SignInComponent, {
       width: '500px'
     })
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true){
+        this.loadUser();
+      }
+    })
   }
-}
+
+  onLogOut() { this.currentUser = localStorage.clear();
+}}

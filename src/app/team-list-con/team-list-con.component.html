@@ -1,21 +1,15 @@
 <div class="teamList">
-  <mat-card
-    [style.overflow]="'auto'"
-    style="
+  <mat-card [style.overflow]="'auto'" style="
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: 0;
-    "
-  >
+    ">
     <div style="margin: 2%; margin-left: 0">
       <mat-card-title>Teams</mat-card-title>
 
-      <mat-progress-bar
-        *ngIf="!isTeamsLoaded"
-        mode="indeterminate"
-      ></mat-progress-bar>
+      <mat-progress-bar *ngIf="!isTeamsLoaded" mode="indeterminate"></mat-progress-bar>
 
       <mat-divider></mat-divider>
     </div>
@@ -24,88 +18,58 @@
       <mat-card-content>
         <!-- <mat-accordion> -->
         <div *ngFor="let team of teams; let i = index; trackBy: teamById">
-          <mat-expansion-panel
-            (click)="showTeamDetails(team.id)"
-            #panel
+          <mat-expansion-panel (click)="showTeamDetails(team.id)" #panel
             (mouseenter)="dragging ? onDragOverExpansion(panel, 'enter') : null"
-            (mouseleave)="dragging ? onDragOverExpansion(panel, 'leave') : null"
-          >
+            (mouseleave)="dragging ? onDragOverExpansion(panel, 'leave') : null">
             <mat-expansion-panel-header>
               <mat-panel-title>{{ team.name }}</mat-panel-title>
             </mat-expansion-panel-header>
 
-            <div
-              (cdkDropListEntered)="draggedOver = true"
-              (cdkDropListExited)="draggedOver = false"
-              (cdkDropListDropped)="draggedOver = false"
-              style="
+            <div (cdkDropListEntered)="draggedOver = true" (cdkDropListExited)="draggedOver = false"
+              (cdkDropListDropped)="draggedOver = false" style="
                 display: flex;
                 justify-content: flex-start;
                 margin-top: 1rem;
                 min-height: 10px;
-              "
-              [id]="team.id.toString()"
-              [cdkDropListData]="team"
-              cdkDropList
-              cdkDropListOrientation="horizontal"
-              (cdkDropListDropped)="onDropMember($event)"
-            >
+              " [id]="team.id.toString()" [cdkDropListData]="team" cdkDropList cdkDropListOrientation="horizontal"
+              (cdkDropListDropped)="onDropMember($event)">
               <ng-container *ngIf="team.members.length < 1">
-                <div
-                  style="
+                <div style="
                     display: flex;
                     justify-content: center;
                     font-weight: bold;
                     padding-top: 1rem;
                     width: 100%;
                     margin: auto;
-                  "
-                >
+                  ">
                   <div class="noMembers" *ngIf="!draggedOver">
                     No Members on this Team.
                   </div>
                 </div>
               </ng-container>
               <ng-container *ngFor="let member of team.members">
-                <img
-                  #templatePhoto
-                  class="memberPhoto"
-                  src="{{ member.pathToPhoto }}"
-                  (error)="templatePhoto.src = 'assets/avatar.png'"
-                  alt="member photo"
-                  matTooltip="{{ member.firstName }}  {{ member.lastName }}"
-                  matTooltipPosition="above"
-                  (click)="onMemberSelect(member.id)"
-                  cdkDrag
-                  (cdkDragStarted)="dragging = true"
-                  (cdkDragEnded)="dragEnded($event)"
-                />
+                <img #templatePhoto class="memberPhoto" src="{{ member.pathToPhoto }}"
+                  (error)="templatePhoto.src = 'assets/avatar.png'" alt="member photo"
+                  matTooltip="{{ member.firstName }}  {{ member.lastName }}" matTooltipPosition="above"
+                  (click)="onMemberSelect(member.id)" cdkDrag (cdkDragStarted)="dragging = true"
+                  (cdkDragEnded)="dragEnded($event)" />
               </ng-container>
             </div>
             <mat-action-row class="addMember">
-              <mat-error class="sizeLimit" *ngIf="amountError">Team size limited to 12 members</mat-error>
+              <mat-error class="sizeLimit" *ngIf="amountError && team.members.length >= 12">Team size limited to 12 members</mat-error>
               <p class="counter">{{ team.members.length }} / 12</p>
-              <button [disabled]="team.members.length >= 12" class="material-icons add-person"  (click)="addMemberDialog(team.id)"
-                >person_add</button
-              >
+              <button [disabled]="team.members.length >= 12" class="material-icons add-person"
+                (click)="addMemberDialog(team.id)">person_add</button>
             </mat-action-row>
           </mat-expansion-panel>
           <mat-expansion-panel>
             <div class="info-container">
               <div style="display: flex; justify-content: space-between">
                 <ng-container *ngFor="let member of team.members">
-                  <img
-                    #templatePhoto
-                    style="width: 7%; cursor: pointer"
-                    class="memberPhoto"
-                    src="{{ member.pathToPhoto }}"
-                    (error)="templatePhoto.src = 'assets/avatar.png'"
-                    alt="member photo"
-                    matTooltip="{{ member.firstName }}  {{ member.lastName }}"
-                    matTooltipPosition="above"
-                    (click)="onMemberSelect(member.id)"
-                    cdkDrag
-                  />
+                  <img #templatePhoto style="width: 7%; cursor: pointer" class="memberPhoto"
+                    src="{{ member.pathToPhoto }}" (error)="templatePhoto.src = 'assets/avatar.png'" alt="member photo"
+                    matTooltip="{{ member.firstName }}  {{ member.lastName }}" matTooltipPosition="above"
+                    (click)="onMemberSelect(member.id)" cdkDrag />
                 </ng-container>
               </div>
             </div>
@@ -117,11 +81,7 @@
     </div>
     <div>
       <mat-action-row class="actionRow">
-        <span
-          class="material-icons"
-          matTooltip="Add Team"
-          (click)="onAddTeam()"
-        >
+        <span class="material-icons" matTooltip="Add Team" (click)="onAddTeam()">
           add_box
         </span>
       </mat-action-row>

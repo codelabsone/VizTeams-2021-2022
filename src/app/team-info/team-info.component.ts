@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TeamEditComponent } from './team-edit/team-edit.component';
 import { ArchiveDialogComponent } from './archive-dialog/archive-dialog.component';
 import { AddMemberComponent } from '../team-list-con/add-member/add-member.component';
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-team-info',
@@ -55,7 +56,10 @@ export class TeamInfoComponent implements OnInit {
   }
 
   onArchiveMember() {
-    this.db.deleteMember(this.activeMember.id);
+    console.log('deleting');
+    this.db.deleteMember(this.activeMember.id).subscribe(() => {
+      this.teamsService.updateTeamDetails()
+    });;
   }
 
   ngOnDestroy() {}
@@ -64,6 +68,11 @@ export class TeamInfoComponent implements OnInit {
     const dialogRef = this.dialog.open(TeamEditComponent, {
       width: '700px',
     });
+    dialogRef.afterClosed().subscribe(boolean =>{
+      if(boolean === true){
+        this.teamsService.updateTeamDetails();
+      }
+    })
   }
 
   onEditMember(activeMember) {

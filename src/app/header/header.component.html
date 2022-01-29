@@ -1,17 +1,26 @@
 <mat-toolbar>
-    <img src="assets/vizient-logo-registered.svg" alt="Vizient Logo">
-    <div class="mat-display-6">
-      <p> VizTeams</p>
-    </div>
-    <div class="sign-up">
-      <button mat-stroked-button matTooltip="Sign-up" matTooltipPosition="below" (click)="onSignUp()">Sign Up</button>
-    </div>
-    <div class="sign-in">
-      <button mat-stroked-button matTooltip="Sign-in" matTooltipPosition="below" (click)="onSignIn()">Sign In</button>
-    </div>
-    <div class="u-name">
-      <p>UserName</p>
-    </div>
+  <img src="assets/vizient-logo-registered.svg" alt="Vizient Logo">
+  <div class="mat-display-6">
+    <p> VizTeams</p>
+  </div>
+
+  <div class="u-name">
+    <ng-container *ngIf="currentUser === undefined || currentUser === null">
+      <div class="sign-up">
+        <button mat-stroked-button matTooltip="Sign Up" matTooltipPosition="below" (click)="onSignUp()" >Sign Up</button>
+      </div>
+      <div class="sign-in">
+        <button mat-stroked-button matTooltip="Sign In" matTooltipPosition="below" (click)="onSignIn()">Sign In</button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="currentUser != null || currentUser != undefined">
+      <div class="mat-display-6">
+       Welcome, {{currentUser.email}}
+      </div>
+      <div class="log-out">
+        <button mat-stroked-button matTooltip="Log Out" matTooltipPosition="below" (click)="onLogOut()">Log Out</button>
+      </div>
+    </ng-container>
+  </div>
 
 </mat-toolbar>
-

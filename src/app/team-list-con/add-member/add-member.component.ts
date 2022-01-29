@@ -7,6 +7,7 @@ import { DatabaseService } from 'src/app/database.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Team } from 'src/app/shared/team.model';
 import { Member } from 'src/app/shared/member.model';
+import { TeamsService } from 'src/app/teams.service';
 
 @Component({
   selector: 'app-add-member',
@@ -43,11 +44,12 @@ export class AddMemberComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public editedMember: Member,
     private dialogRef: MatDialogRef<AddMemberComponent>,
     private http: HttpClient,
-    private databaseService: DatabaseService
-  ) {}
+    private databaseService: DatabaseService,
+    private teamsService: TeamsService,
+  ) { }
 
   ngOnInit(): void {
-    this.databaseService.teams.subscribe((teams) => {
+    this.teamsService.teams.subscribe((teams) => {
       this.teams = teams;
     });
 
@@ -66,7 +68,6 @@ export class AddMemberComponent implements OnInit {
 
   onCancel() {
     this.dialogRef.close();
-    console.log(this.selectedTeamId);
   }
 
   onSubmit(addMemberForm: NgForm) {
@@ -80,13 +81,17 @@ export class AddMemberComponent implements OnInit {
 
     if (addMemberForm.valid && this.editedMember) {
       // Populate the member ID so the proper member gets edited, then send it through
-      this.databaseService.editMember(this.newMember, this.editedMember.id);
-      this.dialogRef.close();
-      console.log(this.newMember);
+      this.databaseService.editMember(this.newMember, this.editedMember.id).subscribe(() => {
+        this.teamsService.updateTeamDetails();
+      });
+      this.dialogRef.close(true);
     } else if (addMemberForm.valid) {
       // Populate the team_id, so the new member has a team assigned to them
-      this.databaseService.addMember(this.newMember);
-      this.dialogRef.close();
+      this.databaseService.addMember(this.newMember).subscribe(() => {
+        this.teamsService.updateTeamDetails();
+      });;
+      this.teamsService.updateTeamDetails();
+      this.dialogRef.close(true);
     }
   }
 
@@ -109,7 +114,7 @@ export class AddMemberComponent implements OnInit {
   }
 
   checkEditMember() {
-    if (this.editedMember != null || undefined) {
+    if (this.editedMember != null || this.editedMember != undefined) {
       this.member = this.editedMember;
       this.selectedTitle = this.editedMember.title;
       this.selectedTeamId = this.editedMember.team.id;

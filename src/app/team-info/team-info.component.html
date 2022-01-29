@@ -1,6 +1,6 @@
 <mat-card>
   <!-- Don't forget to add back the placeholder text -->
-  <ng-container *ngIf="activeMember != null || undefined">
+  <ng-container *ngIf="activeMember != null && activeMember != undefined">
     <mat-card-title>
       <span (click)="onTeamSelected()" class="teamBreadcrumb">{{
         activeMember.team.name
@@ -50,7 +50,7 @@
       >Select a team to view members.</mat-card-title
     >
 
-    <ng-container *ngIf="activeTeam != null || undefined">
+    <ng-container *ngIf="activeTeam != null && activeTeam != undefined">
       <mat-card-title>{{ activeTeam.name }}</mat-card-title>
 
       <mat-card-content class="teamMemberContainer">

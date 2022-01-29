@@ -5,37 +5,45 @@ import { Member } from './shared/member.model';
 import { User } from './shared/user.model';
 
 import { Team } from './shared/team.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
-  teams: ReplaySubject<Team[]> = new ReplaySubject(1);
   teamsURL = 'https://vizteams-api.herokuapp.com/teams';
   membersURL = 'https://vizteams-api.herokuapp.com/members';
   changeTeamURL = 'https://vizteams-api.herokuapp.com/change-team';
   signupURL = 'https://vizteams-api.herokuapp.com/sign-up';
+  signinURL = 'https://vizteams-api.herokuapp.com/sign-in';
 
-  currentUser = new Subject();
 
   constructor(private http: HttpClient) {
-    this.getAllTeams().subscribe((teams) => this.teams.next(teams));
   }
+
 
   getMemberById(id: number) {
     return this.http.get<Member>(this.membersURL + '/' + id);
   }
 
   getAllTeams() {
-    return this.http.get<Team[]>(this.teamsURL);
+    return this.http.get<Team[]>(this.teamsURL).pipe(map(arr => arr.sort((a, b) => {
+      let fa = a.name.toLowerCase(),
+        fb = b.name.toLowerCase();
+      if (fa < fb) {
+        return -1;
+      }
+      if (fa > fb) {
+        return 1;
+      }
+      return 0
+    })))
   }
 
   addTeam(team) {
-    this.http
+   return this.http
       .post<Team>(this.teamsURL, team)
-      .subscribe(() =>
-        this.getAllTeams().subscribe((teams) => this.teams.next(teams))
-      );
+
   }
 
   editTeam(id: number, team: any) {
@@ -47,54 +55,40 @@ export class DatabaseService {
   }
   assignTeam(teamId: number, memberId: number) {
     let teamOb = { team_id: teamId, member_id: memberId };
-    this.http.post(this.changeTeamURL, teamOb).subscribe();
+    return this.http.post(this.changeTeamURL, teamOb);
   }
 
   addMember(newMember: Member) {
-    this.http.post(this.membersURL, newMember).subscribe(() => {
-      this.getAllTeams().subscribe((teams) => this.teams.next(teams));
-    });
+    return this.http.post(this.membersURL, newMember)
   }
 
   editMember(editedMember: Member, memberId: number) {
-    this.http
+    return this.http
       .patch(this.membersURL + '/' + memberId, editedMember)
-      .subscribe(() => {
-        this.getAllTeams().subscribe((teams) => {
-          this.teams.next(teams);
-        });
-      });
+
   }
 
   deleteTeam(id: number) {
-    console.log(this.teamsURL + '/' + id);
-    this.http.delete(this.teamsURL + '/' + id).subscribe(() => {
-      this.http.get<Team[]>(this.teamsURL).subscribe((teams) => {
-        this.teams.next(teams);
-      });
-    });
+    return this.http.delete(this.teamsURL + '/' + id)
   }
 
   deleteMember(id: number) {
-    this.http.delete(this.membersURL + '/' + id).subscribe(() => {
-      this.http.get<Team[]>(this.teamsURL).subscribe((fetchedTeams) => {
-        this.teams.next(fetchedTeams);
-      });
-    });
+    return this.http.delete(this.membersURL + '/' + id)
   }
 
   signUp(email: string, password: string) {
     return this.http
-      .post<User>(this.signupURL, {
+      .post<User | any>(this.signupURL, {
         email: email,
-        password: password,
+        password: password
       })
-      .subscribe((resData) => {
-        localStorage.setItem('userData', JSON.stringify(resData));
-
-        this.currentUser.next(JSON.parse(localStorage.getItem('userData')));
-      });
   }
 
-  signIn(email: string, password: string) {}
+  signIn(email: string, password: string) {
+    return this.http
+      .post<User | any>(this.signinURL, {
+        email: email,
+        password: password
+      })
+  }
 }

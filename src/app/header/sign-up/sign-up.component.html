@@ -1,44 +1,24 @@
 <form class="signUpForm" (ngSubmit)="onSubmit(form)" #form="ngForm">
 
-<mat-dialog-content>
-        <h2 mat-dialog-title style="text-align: center;">Sign up</h2>
+  <mat-dialog-content>
+    <h2 mat-dialog-title style="text-align: center;">Sign up</h2>
     <div class="inputfields-boxs">
       <mat-form-field>
         <mat-label>Enter your email</mat-label>
-            <input matInput placeholder="email@example.com" type="email" name="email" required ngModel>
-        </mat-form-field>
-          <br>
-        <mat-form-field>
-            <mat-label>Password</mat-label>
-                <input  matInput  placeholder="your password" type="password"  name="password" required ngModel>
-        </mat-form-field>
+        <input matInput placeholder="email@example.com" type="email" name="email" required ngModel>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="your password" type="password" name="password" required ngModel>
+      </mat-form-field>
     </div>
-      <div class="su-btns">
-        <button mat-button type="reset" (click)="onCancel()">Cancel</button>
-        <button mat-button type="Submit" [disabled]="form.invalid" >Submit</button>
+    <mat-error>{{errorMessage}}</mat-error>
+    <div class="su-btns">
+      <button mat-button type="reset" (click)="onCancel()">Cancel</button>
+      <button mat-button type="Submit" [disabled]="!form.valid">Submit</button>
 
-      </div>
+    </div>
 
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        placeholder="your password"
-        type="password"
-        name="password"
-        required
-      />
-    </mat-form-field>
-  <div class="su-btns">
-    <button mat-button type="reset" (click)="onCancel()">Cancel</button>
-    <button
-      mat-button
-      type="Submit"
-      [disabled]="!signUpForm.form.touched || signUpForm.form.invalid"
-    >
-      Submit
-    </button>
-  </div>
-</mat-dialog-content>
+  </mat-dialog-content>
 </form>
-

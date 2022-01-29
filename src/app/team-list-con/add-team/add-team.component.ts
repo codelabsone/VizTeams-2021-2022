@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DatabaseService } from 'src/app/database.service';
+import { TeamsService } from 'src/app/teams.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class AddTeamComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<AddTeamComponent>,
     private http: HttpClient,
-    private databaseService: DatabaseService
+    private databaseService: DatabaseService,
+    private teamsService: TeamsService
     ) { }
 
 
@@ -33,8 +35,12 @@ export class AddTeamComponent implements OnInit {
 
   onSubmit(newTeam: NgForm) {
     if (newTeam.valid && newTeam.value.name.trim().length != 0) {
-      this.databaseService.addTeam(newTeam.value);
-      this.dialogRef.close()
+      this.databaseService.addTeam(newTeam.value).subscribe(() =>{
+        this.teamsService.updateTeamDetails();
+        this.dialogRef.close()
+      }
+    );
+
     }
   }
 }

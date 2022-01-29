@@ -37,7 +37,7 @@
           #firstName
           required
         />
-        <mat-error *ngIf="form.invalid">Please enter a value</mat-error>
+        <mat-error>First name required</mat-error>
       </mat-form-field>
 
       <!--! LAST NAME -->
@@ -53,7 +53,7 @@
           name="lastName"
           required
         />
-        <mat-error *ngIf="form.invalid">Please enter a value</mat-error>
+        <mat-error >Last name required</mat-error>
       </mat-form-field>
     </div>
     <div style="display: flex; width: 100%; gap: 10px">
@@ -84,7 +84,7 @@
     </div>
     <div class="form-btns">
       <button mat-button type="reset" (click)="onCancel()">Cancel</button>
-      <button mat-button type="Submit">Submit</button>
+      <button mat-button type="Submit" [disabled]="!form.valid">Submit</button>
     </div>
   </form>
 </div>

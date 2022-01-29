@@ -33,7 +33,7 @@ export class TeamListConComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.databaseService.teams.subscribe((teams) => {
+    this.teamsService.teams.subscribe((teams) => {
       this.teams = teams;
       this.isTeamsLoaded = true;
     });
@@ -71,7 +71,7 @@ export class TeamListConComponent implements OnInit {
       else {
         let memId = event.previousContainer.data.members[event.previousIndex].id;
         let teamId = event.container.data.id;
-        this.databaseService.assignTeam(teamId, memId);
+        this.databaseService.assignTeam(teamId, memId).subscribe(()=>this.teamsService.updateTeamDetails());
         transferArrayItem(
           event.previousContainer.data.members,
           event.container.data.members,

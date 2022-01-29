@@ -13,9 +13,20 @@ mat-toolbar {
 .mat-display-6 {
     margin-bottom: 0;
     margin-left: 1em;
+    color: white;
 }
 .u-name{
   margin-left: auto;
+  display: flex;
+  gap: 16px;
+}
+.mat-stroked-button{
+  border-color: white;
+
+}
+
+button {
+  color: white !important;
 }
 
 p {
@@ -26,7 +37,6 @@ p {
 }
 .sign-up{
   margin-left: 3em;
-  color: white;
   font-weight: 200;
 }
 

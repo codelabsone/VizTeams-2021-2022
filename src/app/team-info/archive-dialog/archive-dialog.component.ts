@@ -17,12 +17,13 @@ export class ArchiveDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
     this.activeTeam = this.data.team;
   }
 
   onConfirmDelete() {
-    this.dbservice.deleteTeam(this.activeTeam.id);
+    this.dbservice.deleteTeam(this.activeTeam.id).subscribe(() => {
+      this.teamservice.updateTeamDetails()
+    });;
     this.teamservice.selectedTeam.next(null);
   }
 }
