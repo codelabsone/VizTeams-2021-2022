@@ -16,7 +16,7 @@ export class DatabaseService {
   changeTeamURL = 'https://vizteams-api.herokuapp.com/change-team';
   signupURL = 'https://vizteams-api.herokuapp.com/sign-up';
 
-  currentUser = new Subject;
+  currentUser = new Subject();
 
   constructor(private http: HttpClient) {
     this.getAllTeams().subscribe((teams) => this.teams.next(teams));
@@ -75,18 +75,26 @@ export class DatabaseService {
     });
   }
 
-  signUp(email: string, password: string) {
-    return this.http.post<User>(this.signupURL, {
-      email: email,
-      password: password
-    }).subscribe(resData => {
-      localStorage.setItem('userData', JSON.stringify(resData));
-
-      this.currentUser.next(JSON.parse(localStorage.getItem('userData')));
-
+  deleteMember(id: number) {
+    this.http.delete(this.membersURL + '/' + id).subscribe(() => {
+      this.http.get<Team[]>(this.teamsURL).subscribe((fetchedTeams) => {
+        this.teams.next(fetchedTeams);
+      });
     });
   }
 
-  signIn(email: string, password: string) {
+  signUp(email: string, password: string) {
+    return this.http
+      .post<User>(this.signupURL, {
+        email: email,
+        password: password,
+      })
+      .subscribe((resData) => {
+        localStorage.setItem('userData', JSON.stringify(resData));
+
+        this.currentUser.next(JSON.parse(localStorage.getItem('userData')));
+      });
   }
+
+  signIn(email: string, password: string) {}
 }

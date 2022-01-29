@@ -54,6 +54,10 @@ export class TeamInfoComponent implements OnInit {
     dialogRef.afterClosed().subscribe;
   }
 
+  onArchiveMember() {
+    this.db.deleteMember(this.activeMember.id);
+  }
+
   ngOnDestroy() {}
 
   onEditTeam() {
