@@ -37,12 +37,20 @@ export class TeamsService implements OnInit {
               team => this.selectedTeam.next(team)
             )
           }
+        },
+        (error) => {
+          this.selectedMemberId = null;
+          this.updateTeamDetails();
         }
       )
     } else if (this.selectedTeamId != null || undefined) {
       this.db.getTeam(this.selectedTeamId).subscribe(
-        team => { this.selectedTeam.next(team); this.selectedMember.next(null) }
-      )
+        team => { this.selectedTeam.next(team); this.selectedMember.next(null)
+         },
+        (error) => {
+          this.selectedTeamId = null;
+          this.updateTeamDetails();
+        })
     } else { this.selectedTeam.next(null); this.selectedMember.next(null) };
 
   }

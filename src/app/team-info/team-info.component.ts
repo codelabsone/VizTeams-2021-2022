@@ -56,13 +56,7 @@ export class TeamInfoComponent implements OnInit {
   onArchiveMember() {
     console.log('deleting');
     this.db.deleteMember(this.activeMember.id).subscribe(() => {
-      this.teamsService.updateTeamDetails();
-
-      this.db.getTeam(this.activeTeam.id).subscribe((team) => {
-        //* removes deleted member from team list
-        this.activeTeam = team;
-      });
-      this.teamsService.selectedMember.next(null); //* removes deleted member from actively shown member.
+      this.teamsService.changeSelectedMemberId(null)
     });
   }
 
