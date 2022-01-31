@@ -17,33 +17,32 @@ export class DatabaseService {
   signupURL = 'https://vizteams-api.herokuapp.com/sign-up';
   signinURL = 'https://vizteams-api.herokuapp.com/sign-in';
 
-
-  constructor(private http: HttpClient) {
-  }
-
+  constructor(private http: HttpClient) {}
 
   getMemberById(id: number) {
     return this.http.get<Member>(this.membersURL + '/' + id);
   }
 
   getAllTeams() {
-    return this.http.get<Team[]>(this.teamsURL).pipe(map(arr => arr.sort((a, b) => {
-      let fa = a.name.toLowerCase(),
-        fb = b.name.toLowerCase();
-      if (fa < fb) {
-        return -1;
-      }
-      if (fa > fb) {
-        return 1;
-      }
-      return 0
-    })))
+    return this.http.get<Team[]>(this.teamsURL).pipe(
+      map((arr) =>
+        arr.sort((a, b) => {
+          let fa = a.name.toLowerCase(),
+            fb = b.name.toLowerCase();
+          if (fa < fb) {
+            return -1;
+          }
+          if (fa > fb) {
+            return 1;
+          }
+          return 0;
+        })
+      )
+    );
   }
 
   addTeam(team) {
-   return this.http
-      .post<Team>(this.teamsURL, team)
-
+    return this.http.post<Team>(this.teamsURL, team);
   }
 
   editTeam(id: number, team: any) {
@@ -59,36 +58,32 @@ export class DatabaseService {
   }
 
   addMember(newMember: Member) {
-    return this.http.post(this.membersURL, newMember)
+    return this.http.post(this.membersURL, newMember);
   }
 
   editMember(editedMember: Member, memberId: number) {
-    return this.http
-      .patch(this.membersURL + '/' + memberId, editedMember)
-
+    return this.http.patch(this.membersURL + '/' + memberId, editedMember);
   }
 
   deleteTeam(id: number) {
-    return this.http.delete(this.teamsURL + '/' + id)
+    return this.http.delete(this.teamsURL + '/' + id);
   }
 
   deleteMember(id: number) {
-    return this.http.delete(this.membersURL + '/' + id)
+    return this.http.delete(this.membersURL + '/' + id);
   }
 
   signUp(email: string, password: string) {
-    return this.http
-      .post<User | any>(this.signupURL, {
-        email: email,
-        password: password
-      })
+    return this.http.post<User | any>(this.signupURL, {
+      email: email,
+      password: password,
+    });
   }
 
   signIn(email: string, password: string) {
-    return this.http
-      .post<User | any>(this.signinURL, {
-        email: email,
-        password: password
-      })
+    return this.http.post<User | any>(this.signinURL, {
+      email: email,
+      password: password,
+    });
   }
 }

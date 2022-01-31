@@ -1,7 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  scrollbar-width: thin;
 
-html, body { height: 100vh; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f5f5f5}
-.mat-expansion-panel-body{
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #f0f0f0;
+  }
+}
+
+html,
+body {
+  height: 100vh;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f5f5;
+}
+.mat-expansion-panel-body {
   background-color: rgb(194, 194, 194) !important;
 }
