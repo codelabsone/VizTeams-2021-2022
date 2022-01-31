@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth.service';
 import { DatabaseService } from 'src/app/database.service';
+import { User } from 'src/app/shared/user.model';
 
 
 @Component({
@@ -18,7 +20,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<SignUpComponent>,
-    private db: DatabaseService
+    private db: DatabaseService,
+    private authService: AuthService
   ) {
   }
 
@@ -29,19 +32,11 @@ export class SignUpComponent implements OnInit {
     let email = signUpForm.value.email
     let password = signUpForm.value.password
     if (signUpForm.valid) {
-      this.db.signUp(email, password).pipe(map(res => {
-        if (res.error) {
-          throw new Error(res.error)
-        }
-        else { return res }
-      }))
-        .subscribe((resData) => {
-          console.log(resData);
-          localStorage.setItem('userData', JSON.stringify(resData));
-          this.currentUser = JSON.parse(localStorage.getItem('userData'));
-          this.dialogRef.close(true);
+      this.authService.onSignUp(email, password)
+        .subscribe((resData: {user: User, token: string}) => {
+          this.dialogRef.close();
         },
-          (error) => {console.error(error); this.errorMessage = error.message;}
+        (error) => {console.log(error); this.errorMessage = error.message;}
         );
     }
   }

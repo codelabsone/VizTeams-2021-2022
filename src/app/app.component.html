@@ -1,9 +1,14 @@
 <app-header></app-header>
 <main>
+  <ng-container *ngIf="user" >
   <div class="teams-container">
     <app-team-list-con></app-team-list-con>
   </div>
   <div class="info-container">
     <app-team-info></app-team-info>
-  </div>
+  </div></ng-container>
+
+  <ng-container *ngIf="!user">
+    <mat-card class="no-user">Please sign in to get started.</mat-card>
+  </ng-container>
 </main>
